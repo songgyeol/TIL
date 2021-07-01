@@ -1,4 +1,12 @@
 # TIL
+
+###################2021.07.01
+_New String Interpolation
+_String Indices
+_String Index
+_String Basic
+
+
 2021.06.28
 ###################String Interpolation
 var str = "12.34KB"
