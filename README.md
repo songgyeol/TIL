@@ -1,10 +1,21 @@
 # TIL
 
+
+###################2021.07.02
+_String Substring
+_String Editing #1
+_String Editing #2
+_String Comparison
+_String Searching
+_String Options #1
+_String Options #2
+
+
 ###################2021.07.01
 _New String Interpolation
 _String Indices
 _String Index
-_String Basic
+_String Basics
 
 
 2021.06.28
