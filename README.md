@@ -1,4 +1,39 @@
 # TIL
+
+
+###################2021.07.03_3
+SubString
+let str = "Hello, Swift"
+let l = str.lowercased()
+
+var first = str.prefix(1)
+//서브 스트링은 원본 문자열의 메모리를 공유한다
+
+first.insert("!", at: first.endIndex)
+
+str
+first
+
+let newStr = String(str.prefix(1))
+//문자열에서 특정 범위를 추출하는 방법
+//오류메세지 : Deprecated = 나중에 버젼 바뀌면 사용 안된다는 메세지
+
+//let s = str[str.startIndex ..< str.index(str.startIndex, offsetBy: 2)]
+//위 아래 같은 코드
+let s = str[..<str.index(str.startIndex, offsetBy: 2)]
+
+//1. 원본메모리를 공유한다
+//2. s변수의 저장된 문자열을 바꾸지않는다면 새로운 문자열은 생성되지 않는다
+//3. s변수의 저장된 문자열을 바꾸면 그 시점에 새로운 문자열 생성된다
+//4. 직접 새로운 문자열을 생성하고 싶다면, String 생성자를 사용한다.
+
+str [str.index(str.startIndex, offsetBy: 2)...]
+
+let lower = str.index(str.startIndex, offsetBy: 2)
+let upper = str.index(str.startIndex, offsetBy: 5)
+str[lower ... upper]
+
+
 ###################2021.07.03_2  
 String Basics  
 //문자열 처리 테크닉
