@@ -1,5 +1,97 @@
 # TIL
 
+###################2021.07.04
+String Editing #2
+###########Replacing Substrings
+//문자열의 일부를 교체 및 삭제하는 방법
+var str = "Hello, Objective-C"
+if let range = str.range(of: "Objective-C") {
+    str.replaceSubrange(range, with: "Swift")
+}
+str
+
+if let range = str.range(of: "Hello") {
+    _ = str.replacingCharacters(in: range, with: "Hi")
+}
+
+var s = str.replacingOccurrences(of: "Swift", with: "Awesome Swift")
+s
+
+s = str.replacingOccurrences(of: "swift", with: "Awesome Swift")
+
+s
+//대소문자 구분
+
+
+
+#############Removing Substrings
+//특정 문자나 범위 삭제 방법
+var str = "Hello Awesome Swift!!!"
+
+let lastCharIndex = str.index(before: str.endIndex)
+
+var removed = str.remove(at: lastCharIndex)
+
+removed
+str
+
+removed = str.removeFirst()
+removed
+str
+
+str.removeFirst(2)
+str
+
+str.removeLast(2)
+str
+
+if let range = str.range(of: "Awesome") {
+    str.removeSubrange(range)
+str
+}
+
+str.removeAll()
+str
+
+str.removeAll(keepingCapacity: true)
+
+
+str = "Hello, Awesome Swift!!!"
+
+var substr = str.dropLast()
+
+substr = str.dropLast(3)
+
+
+
+String Editing #1
+Appending Strings and Characters
+
+//문자열을 편집하는 방법
+//문자열 뒤에 새로운 문자열을 연결하는 방법
+
+//[
+//var str = "Hello"
+//str.append(", ")
+//str
+//
+//let s = str.appending("Swift")
+//str
+//s
+//s.appending("!!")
+//
+//"File size is ".appendingFormat("%.1f", 12.3456)
+//]
+
+var str = "Hello Swift"
+
+str.insert(",", at: str.index(str.startIndex, offsetBy: 5))
+
+if let sIndex = str.firstIndex(of: "S") {
+   str.insert(contentsOf: "Awesome", at: sIndex)
+}
+str
+
 
 ###################2021.07.03_3
 SubString
