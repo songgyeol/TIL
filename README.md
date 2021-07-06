@@ -1,6 +1,84 @@
 # TIL
-###################2021.07.05
+###################2021.07.06
+String Options #1
+Case Insensitive Option
+"A" == "a"
+"A".caseInsensitiveCompare("a") == .orderedSame
 
+"A" .compare("a", options: [.caseInsensitive])
+    == .orderedSame
+
+NSString.CompareOptions
+//cont + Commd + click
+
+
+Literal Option
+let a = "\u{D55C}"
+let b = "\u{1112}\u{1161}\u{11AB}"
+
+a == b
+a.compare(b) == .orderedSame
+
+a.compare(b, options: [.literal]) == .orderedSame
+
+
+
+Backwards Option
+let korean = "행복하세요"
+let english = "Be happy"
+let arabic = "كن سعيدا"
+
+if let range = english.range(of: "p", options: [.backwards]) {
+    english.distance(from: english.startIndex, to:
+                        range.lowerBound)
+}
+//backward는 문자열의 검색 방향을 바꾸는 옵션
+
+
+Anchored Option
+let str = "Swift Programing"
+
+if let result = str.range(of: "Swift") {
+    print(str.distance(from: str.startIndex, to:
+                        result.lowerBound))
+} else {
+    print("not found")
+}
+
+
+if let result = str.range(of: "Swift", options:
+                            [.backwards]) {
+    print(str.distance(from: str.startIndex, to:
+                        result.lowerBound))
+} else {
+    print("not found")
+}
+
+if let result = str.range(of: "Swift", options:
+                            [.anchored]) {
+    print(str.distance(from: str.startIndex, to:
+                        result.lowerBound))
+} else {
+    print("not found")
+}
+
+if let result = str.range(of: "Swift", options:
+                            [.anchored, .backwards]) {
+    print(str.distance(from: str.startIndex, to:
+                        result.lowerBound))
+} else {
+    print("not found")
+}
+
+str.lowercased().hasPrefix("swift")
+
+if let _ = str.range(of: "swift", options:
+                        [.anchored, .caseInsensitive]) {
+    print("same prefix")
+}
+
+
+###################2021.07.05
 ###################2021.07.04
 String Editing #2
 ###########Replacing Substrings
