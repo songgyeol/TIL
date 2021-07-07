@@ -1,4 +1,7 @@
 # TIL
+
+###################2021.07.07
+Structure
 ###################2021.07.06
 String Options #1
 Case Insensitive Option
