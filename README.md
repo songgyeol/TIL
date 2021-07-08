@@ -1,4 +1,185 @@
 # TIL
+###################2021.07.08
+Collection
+Array#1
+Array Basics
+Creating an Array
+
+let nums = [1, 2, 3]
+
+let emptyArray: [Int] = []
+
+let emptyArray2 = Array<Int>()
+let empty3 = [Int]()
+
+let zeroArray = [Int](repeating: 0, count: 10)
+
+
+
+
+Inspecting an Array
+
+nums.count
+
+nums.count == 0
+
+nums.isEmpty
+emptyArray.isEmpty
+
+
+
+
+Accessing Elements
+
+//배열인덱스는 0부터 시작
+let fruits = ["Apple", "Banana", "Mellon"]
+fruits[0]
+fruits[2]
+
+fruits[0...1]
+
+fruits[fruits.startIndex]
+fruits[fruits.index(before: fruits.endIndex)]
+
+fruits.first
+fruits.last
+
+emptyArray.first
+emptyArray.last
+
+//emptyArray[0]
+
+Array#2
+Adding Elements
+
+//새로운 요소를 추가 삭제하고 싶다면 var
+//let으로 설정한다면 추가삭제 불가
+var alphabet = ["A", "B", "C"]
+alphabet.append("E")
+
+//2개 이상의 요소를 추가하고 싶다면
+alphabet.append(contentsOf: ["F", "G"])
+
+//중간에 넣을때
+alphabet.insert("D", at: 3)
+alphabet.insert(contentsOf: ["a", "b", "c"], at: 0)
+
+alphabet[0...2] = ["x", "y", "z"]
+alphabet
+
+alphabet.replaceSubrange(0...2, with: ["a", "b", "c"])
+alphabet
+
+alphabet[0...2] = ["z"]
+alphabet
+
+alphabet[0..<1] = []
+alphabet
+
+
+Removing Elements
+
+//요소를 삭제하는 방법
+alphabet = ["A", "B", "C", "D", "E", "F", "G"]
+//하나의 요소를 삭제
+alphabet.remove(at: 2)
+alphabet
+
+alphabet.removeFirst()
+alphabet
+
+alphabet.removeFirst(2)
+alphabet
+
+alphabet.removeAll()
+
+alphabet.popLast()
+
+alphabet = ["A", "B", "C", "D", "E", "F", "G"]
+alphabet.popLast()
+alphabet
+
+alphabet.removeSubrange(0...2)
+alphabet
+
+alphabet[0...2] = []
+alphabet
+
+
+
+
+Array#3
+Comparing Arrays
+
+//배열에서 비교,검색,정렬
+let a = ["A", "B", "C"]
+let b = ["a", "b", "c"]
+
+a == b
+a != b
+
+a.elementsEqual(b)
+
+a.elementsEqual(b) { (lhs, rhs) -> Bool in
+    return lhs.caseInsensitiveCompare(rhs)
+        == .orderedSame
+}
+
+
+
+
+Finding Elements
+
+let nums = [1, 2, 3, 1, 4, 5, 2, 6, 7, 5, 0]
+nums.contains(1)
+nums.contains(8)
+
+nums.contains { (n) -> Bool in
+    return n % 2 == 0
+}
+
+nums.first { (n) -> Bool in
+    return n % 2 == 0
+}
+
+nums.firstIndex { (n) -> Bool in
+    return n % 2 == 0
+}
+
+nums.firstIndex(of: 1)
+
+nums.lastIndex(of: 1)
+
+
+
+
+Sorting on Array
+
+//배열을 정렬
+//sort = 배열을 직접 정렬
+//sorted = 정렬된 새로운 배열을 리턴
+
+nums.sorted()
+nums
+
+nums.sorted { (a, b) -> Bool in
+    return a > b
+}
+
+nums.sorted().reversed()
+[Int](nums.sorted().reversed())
+
+var mutableNums = nums
+
+mutableNums.sort()
+mutableNums.reverse()
+
+//위치바꾸기
+mutableNums
+mutableNums.swapAt(0, 1)
+//렌덤으로 순서바꾸기
+mutableNums.shuffle()
+
 
 ###################2021.07.07
 Structure
