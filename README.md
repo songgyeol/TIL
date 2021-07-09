@@ -1,5 +1,112 @@
 # TIL
+
+###################2021.07.09
+Dictionary#1
+Dictionary
+Dictionary Literal
+
+var dict = ["A": "Apple", "B": "Bnana"]
+dict = [:]
+
+
+Dictionary Type
+//정식문법let dict1: Dictionary<String, Int>
+//단축let dict2: [String: Int]
+
+
+Creating a Dictionary
+let words = ["A": "Apple", "B": "Banana", "C": "City"]
+
+let emptyDict: [String: String] = [:]
+
+let emptyDict2 = [String: String]()
+let emptyDict3 = Dictionary<String, String>()
+
+
+Inspecting a Dictionary
+//저장된 요소의 숫자를 확인
+words.count
+words.isEmpty
+
+
+Accessing Keys and Values
+//저장되어있는 요소의 접근
+words["A"]
+words["Apple"]
+//key를 통해 접근하기 때문에 애플은 인식못함
+
+let a = words["E"]
+let b = words["E", default: "Empty"]
+
+
+for k in words.keys {
+    print(k)
+}
+
+for v in words.values {
+    print(v)
+}
+
+let keys = Array(words.keys)
+let values = Array(words.values)
+
+Dictionary#2
+Adding Keys and Values
+//새로운 요소를 추가하고 삭제하는 방법
+
+var words = [String: String]()
+
+words["A"] = "Apple"
+words["B"] = "Banana"
+
+words.count
+words
+
+
+words["B"] = "Ball"
+
+words.count
+words
+
+//Key가 존재한다면 새로운 값을, 기존 값이 있다면 변경
+
+
+words.updateValue("City", forKey: "C")
+
+words.updateValue("Circle", forKey: "C")
+
+//Insert + Update = Upsert
+
+
+
+Removing Keys and Values
+//요소를 삭제하는 방법
+words
+words["B"] = nil
+
+words
+
+words["Z"] = nil
+
+//삭제하고 삭제된 값을 보여줌
+words.removeValue(forKey: "A")
+//삭제되서 nil
+words.removeValue(forKey: "A")
+
+
+//전체요소 삭제
+words.removeAll()
+
+
+
+
+
+
+
 ###################2021.07.08
+Dictionary
+
+
 Collection
 Array#1
 Array Basics
