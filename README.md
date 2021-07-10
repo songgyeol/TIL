@@ -1,4 +1,134 @@
 # TIL
+###################2021.07.10_2
+Set#1
+Set
+
+Set Type
+//중복된 요소는 무시한다
+let set: Set<Int> = [1, 2, 2, 3, 3, 3]
+set.count
+
+
+Inspecting a Set
+set.count
+//비어있는지 확인
+set.isEmpty
+
+Testing for Membership
+//요소가 포함되어 있는지 확인
+set.contains(1)
+
+Adding and Removing Elements
+var words = Set<String>()
+
+var insertResult = words.insert("Swift")
+insertResult.inserted
+insertResult.memberAfterInsert
+
+insertResult = words.insert("Swift")
+insertResult.inserted
+insertResult.memberAfterInsert
+
+var updateResult = words.update(with: "Swift")
+updateResult
+
+updateResult = words.update(with: "Apple")
+updateResult
+
+var value = "Swift"
+value.hashValue
+
+updateResult = words.update(with: "value")
+updateResult
+
+value = "Hello"
+value.hashValue
+
+updateResult = words.update(with: "value")
+updateResult
+
+struct SampleData: Hashable {
+    var hashValue: Int = 123
+    var data: String
+    
+    init(  data: String) {
+        self.data = data
+    }
+    static func ==(lhs: SampleData, rhs: SampleData)
+    -> Bool {
+        return lhs.hashValue == rhs.hashValue
+    }
+}
+
+
+var sampleSet = Set<SampleData>()
+
+var data = SampleData("Swift")
+data.hashValue
+
+var r = sampleSet.insert(data)
+r.inserted
+r.memberAfterInsert
+sampleSet
+
+data.data = insertResult(data)
+r.inserted
+r.memberAfterInsert
+sampleSet
+
+SmapleSet.update(with: data)
+SampleSet
+
+
+Set#2
+Comparing Sets
+var a: Set = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+var b: Set = [1, 3, 5, 7, 9]
+var c: Set = [2, 4, 6, 8, 10]
+let d: Set = [1, 7, 5, 9, 3]
+
+a == b
+a != b
+
+b == d
+
+b.elementsEqual(d)
+
+a.isSubset(of: a)
+a.isStrictSubset(of: a)
+
+b.isSubset(of: a)
+b.isStrictSubset(of: a)
+
+a.isSubset(of: a)
+a.isStrictSubset(of: a)
+
+a.isSubset(of: b)
+a.isStrictSubset(of: b)
+
+a.isSubset(of: c)
+a.isStrictSubset(of: c)
+
+
+a.isDisjoint(with: b)
+a.isDisjoint(with: c)
+b.isDisjoint(with: c)
+
+
+
+Combining Setsa = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+b = [1, 3, 5, 7, 9]
+c = [2, 4, 6, 8, 10]
+
+var result = b.union(c)
+
+result = b.union(a)
+b.formUnion(c)
+b
+
+
+
+
 ###################2021.07.10
 Dictionary#3
 Comparing Dictionaries
