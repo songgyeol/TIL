@@ -1,4 +1,54 @@
 # TIL
+###################2021.07.10
+Dictionary#3
+Comparing Dictionaries
+let a = ["A": "Apple", "B": "Banana", "C": "City"]
+let b = ["A": "Apple", "C": "City", "B": "Banana"]
+
+a == b
+a != b
+
+//a.elementsEqual(b) { (lhs, rhs) -> Bool in
+//    print(lhs.keym rhs.key)
+//    return lhs.key.caseInsensitiveCompare(rhs.key)
+//        == .orderedSame &&
+//}
+let aKeys = a.keys.sorted()
+let bKeys = b.keys.sorted()
+
+aKeys.elementsEqual(bKeys) { (lhs, rhs) -> Bool in
+    guard lhs.caseInsensitiveCompare(rhs)
+            == .orderedSame else {
+        return false
+    }
+    
+    guard let lv = a[lhs], let rv = b[rhs],
+          lv.caseInsensitiveCompare(rv) == .orderedSame
+    else {
+        return false
+    }
+    return true
+}
+
+
+
+Finding Elements
+//검색구현
+//words?????????????
+words = ["A": "Apple", "B": "Banana", "C": "City"]
+
+let c: ((String, String)) -> Bool in = {
+    $0.0 == "B" || $0.1.contains("i")
+}
+
+words.contains(where: c)
+
+let r = words.first(where: c)
+r?.key
+r?.value
+
+
+words.filter(c)
 
 ###################2021.07.09
 Dictionary#1
