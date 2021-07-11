@@ -1,4 +1,43 @@
 # TIL
+#####################################################################################2021.07.11
+Enumeration
+_Enumeration Types
+let left = "left"
+let center = "center"
+let right = "right"
+
+var alignment = center
+
+if alignment == "Center" {
+    
+}
+
+_Syntax
+enum Alignment {
+    case left
+    case right
+    case center
+}
+
+Alignment.center
+
+var textAlignment = Alignment.center
+
+textAlignment = .left
+
+if textAlignment == .center {
+    
+}
+
+switch textAlignment {
+case .left:
+    print("left")
+case .right:
+    print("right")
+case .center:
+    print("center")
+}
+
 ###################2021.07.10_2
 Set#1
 Set
