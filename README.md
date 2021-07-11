@@ -1,4 +1,124 @@
 # TIL
+#####################################################################################2021.07.11_2
+Structure and Class
+_Structure
+struct Person {
+    var name: String
+    var age: Int
+    
+    func speak() {
+        print("Hello")
+    }
+}
+
+
+let p = Person(name: "Steve", age: 50)
+
+let name = "Paul"
+name
+
+p.name
+p.age
+
+p.speak()
+
+
+Class
+class Person {
+    var name = "John Doe"
+    var age = 0
+    
+    func speak() {
+        print("Hello")
+    }
+}
+
+let p = Person()
+
+_Initializer Syntax
+let str = "123"
+let num = Int(str)
+
+class Position {
+    var x: Double
+    var y: Double
+    
+    init() {
+        x = 0.0
+        y = 0.0
+    }
+
+//생성자는 속성 초기화가 제일 중요하고 유일한 목적, 생성자 실행이 종료되는 시점에는 모든 속성의 초기값이 저장되어 있어야 한다.
+
+init(value: Double) {
+    x = value
+    y = value
+  }
+}
+
+let a = Position()
+a.x
+a.y
+
+let b = Position(value: 100)
+b.x
+b.y
+//열거형,구조체,클래스는 모두 설계도이다
+//설계도에 따라서 인스턴스를 만들기 위해서는 초기화 과정이 반드시 필요
+//생성자를 호출하면 초기화가 시작되고 생성자 실행이 완료되면 모든 속성이 초기화된다
+//에러 없이 초기화가 되면 인스턴스 생성
+
+_Value Types and Reference Types
+//가평식과 참조형식의 차이점
+//분류방법
+//스위프트에서 가평식은(구조체,열거형,튜플)  참조형식(클래스,클로져)
+
+struct PositionValue {
+    var x = 0.0
+    var y = 0.0
+}
+
+var v = PositionValue()
+var o = PositionValue()
+
+
+var v2 = v
+var o2 = o
+
+v2.x = 12
+v2.y = 34
+
+v
+v2
+
+
+o2.x = 12
+o2.y = 34
+
+o
+o2
+
+_Nested Types
+//형식 내부의 선언된 형식
+
+class One {
+    struct Two {
+        enum Three {
+            case a
+            
+            class Four {
+                
+            }
+        }
+    }
+    
+    var a = Two()
+}
+
+let two: One.Two = One.Two()
+
+
+
 #####################################################################################2021.07.11
 Enumeration
 _Enumeration Types
