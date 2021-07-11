@@ -1,4 +1,158 @@
 # TIL
+#####################################################################################2021.07.11_3
+Property
+_Stored Properties
+struct Person {
+    let name: String = "John Doe"
+    var age: Int = 33
+
+
+Explicit Member Expression
+var p = Person()
+p.name
+p.age
+
+p.age = 30
+
+Lazy Stored Properties
+struct Image {
+    init() {
+        print("new image")
+    }
+}
+
+struct BlogPost {
+    let title: String = "Title"
+    let content: String = "Content"
+    lazy var attachment: Image = Image()
+    
+    let date: Date = Date()
+    
+    lazy var formattedDate: String = {
+        let f = DateFormatter()
+        f.dateStyle = .long
+        f.timeStyle = .medium
+        return f.string(from: date)
+    }
+}
+
+var post = BlogPost()
+post.attachment
+
+
+_Computed Properties
+class Person {
+   var name: String
+   var yearOfBirth: Int
+
+   init(name: String, year: Int) {
+      self.name = name
+      self.yearOfBirth = year
+   }
+    
+    var age: Int {
+            let calendar = Calendar.current
+            let now = Date()
+            let year = calendar.component(.year, from: now)
+            return year - yearOfBirth
+    
+    }
+}
+
+let p = Person(name: "Jogn", year: 2002)
+p.age
+
+p.yearOfBirth
+
+
+_Property Observer
+class Size {
+    var width = 0.0 {
+        willSet {
+            print(width, "=>", newValue)
+        }
+        didSet {
+        print(oldValue, "=>", width)
+        }
+    }
+}
+
+let s = Size()
+s.width = 123
+
+
+_Type Properties
+Stored Type Properties
+
+class Math {
+    static let pi = 3.14
+}
+
+let m = Math()
+//m.pi
+Math.pi
+
+
+Computed Type Properties
+
+enum Weekday: Int {
+    case sunday = 1, monday, tuesday, wednesday,
+         thursday, friday, saturday
+    
+    static var today: Weekday {
+        let cal = Calendar.current
+        let today = Date()
+        let weekday = cal.component(.weekday, from: today)
+        return Weekday(rawValue: weekday)!
+        
+    }
+}
+
+Weekday.today
+
+
+_self
+struct Size {
+   var width = 0.0
+   var height = 0.0
+    
+    mutating func reset(value: Double) {
+//        width = value
+//        height = value
+        self = Size(width: value, height: value)
+    }
+}
+
+
+
+//    func calcArea() -> Double {
+//        return width * height
+//    }
+//
+//    var area: Double {
+//        return calcArea()
+//    }
+//
+//    func update(width: Double, height: Double) {
+//        self.width = width
+//        self.height = height
+//    }
+//
+//    func doSomething() {
+//        let c = { self.width * self.height}
+//    }
+//
+//    static let unit = ""
+//
+//    static func doSomething() {
+//        //self.width
+//        self.unit
+//
+//    }
+//}
+//셀프는 현재의 인스턴스에 접근하기 위해 사용하는 특별한 속성이다
+//셀프를 타입멤버에서 사용하면 인스턴스가 아닌 형식 자체를 나타낸다
+
 #####################################################################################2021.07.11_2
 Structure and Class
 _Structure
