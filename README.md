@@ -1,5 +1,44 @@
 # TIL
 
+#####################################################################################2021.07.13
+NEXT_iOS!
+
+Inheritance and Polymorphism
+_Inheritance
+//상속
+class Figure {
+    var name = "Unknow"
+    
+    init(name: String){
+        self.name = name
+    }
+    
+    func draw() {
+        print("draw \(name)")
+    }
+}
+
+class Circle: Figure {
+    var radius = 0.0
+}
+
+let c = Circle(name: "Circle")
+c.radius
+c.name
+c.draw()
+//서브클래스는 슈퍼클래스로부터 상속
+
+final class
+//파이널클래스는 상속이 금지
+final Rectangle: Figure {
+    var width = 0.0
+    var height = 0.0
+}
+
+class Square: Rectangle {
+    
+}
+
 #####################################################################################2021.07.11_3
 Method and Subscrip
 _
