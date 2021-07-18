@@ -1,4 +1,22 @@
 # TIL
+
+#####################################################################################2021.07.18
+View & Window
+_Overview
+Text Views - Label, Text Field, Text View
+
+Controls - Button, Switch, Slider, Page Control, Date Picker, Segmented Control, Steeper
+
+Content Views - Image View, Picker View, Progress View,
+
+                             Activity Indicator View, Web View, Map View
+
+Container Views - Scroll View, Table View, Collection View
+
+Bars - Navigation Bar, Tab Bar, Tool Bar, Search Bar
+
+
+
 #####################################################################################2021.07.17
 _Outlet and Action
 _Delegate Pattern
