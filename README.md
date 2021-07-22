@@ -1,4 +1,34 @@
 # TIL
+#####################################################################################2021.07.22_2
+View & Window
+_UIView#3
+class InteractionViewController: UIViewController {
+    
+    @IBOutlet weak var interactionSwitch: UISwitch!
+    
+    @IBOutlet weak var multiTouchSwitch: UISwitch!
+    
+    @IBOutlet weak var touchView: TouchView!
+    
+    
+    @IBAction func switchInteractionEnabled(_ sender: UISwitch) {
+        touchView.isUserInteractionEnabled = sender.isOn
+    }
+    
+    
+    @IBAction func switchMultiTouch(_ sender: UISwitch) {
+        touchView.isMultipleTouchEnabled = sender.isOn
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        interactionSwitch.isOn = touchView.isUserInteractionEnabled
+        multiTouchSwitch.isOn = touchView.isMultipleTouchEnabled
+    }   
+}
+
 #####################################################################################2021.07.22
 View & Window
 _UIView#2
