@@ -1,4 +1,25 @@
 # TIL
+#####################################################################################2021.07.24_2
+_Button #2. Text Button
+class ImageButtonViewController: UIViewController {
+    
+    @IBOutlet weak var btn: UIButton!
+    d
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let normalImage = UIImage(named: "plus-normal")
+        let highlightedImage = UIImage(named: "plus-highlighted")
+        
+        btn.setImage(normalImage, for: .normal)
+        btn.setImage(highlightedImage, for: .highlighted)
+        
+        btn.setBackgroundImage
+//이미지?,,,,상태,,,???
+    }
+}
+
 #####################################################################################2021.07.24_1
 _Button #1. Text Button
 class TextButtonViewController: UIViewController {
