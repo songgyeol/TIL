@@ -1,4 +1,30 @@
 # TIL
+#####################################################################################2021.07.24_1
+_Button #1. Text Button
+class TextButtonViewController: UIViewController {
+    
+    @IBOutlet weak var btn: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    //버튼을 타이틀레이블에 직접 접근해서 바꾸는것을 허용x
+        //UI버튼이 제공하는 메소드를 사용해야 한다.
+//        btn.titleLabel?.text = "Hello"
+//        btn.titleLabel?.textColor = .systemRed
+        
+       //-->>> 
+        btn.setTitle("Hello", for: .normal)
+        btn.setTitle("Haha", for: .highlighted)
+        
+        btn.setTitleColor(.systemRed, for: .normal)
+        btn.setTitleColor(.systemPurple, for: .highlighted)
+        
+        btn.titleLabel?.backgroundColor = .systemYellow
+    }
+}
+
+
+
 #####################################################################################2021.07.24
 System View & Control
 _UIControl & Target-Action
