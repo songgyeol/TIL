@@ -1,4 +1,113 @@
 # TIL
+#####################################################################################2021.07.25_3
+_Switch
+class SwitchViewController: UIViewController {
+    
+    @IBOutlet weak var bulbImageView: UIImageView!
+    
+    @IBOutlet weak var testSwitch: UISwitch!
+    
+    
+    @IBAction func stateChanged(_ sender: UISwitch) {
+        bulbImageView.isHighlighted = sender.isOn
+        
+    }
+    
+    
+    
+    
+    @IBAction func toggle(_ sender: Any) {
+        //testSwitch.isOn.toggle()
+        
+        testSwitch.setOn(!testSwitch.isOn, animated: true)
+        stateChanged(testSwitch)
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+        
+        testSwitch.isOn = bulbImageView.isHighlighted
+    }
+}
+
+_Stepper
+class StepperViewController: UIViewController {
+    
+    @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var valueStepper: UIStepper!
+    @IBOutlet weak var autorepeatSwitch: UISwitch!
+    @IBOutlet weak var continuousSwitch: UISwitch!
+    @IBOutlet weak var wrapSwitch: UISwitch!
+    
+    @IBAction func valueChanged(_ sender: UIStepper) {
+        valueLabel.text = "\(sender.value)"
+    }
+    
+    
+    
+    @IBAction func toggleAutorepeat(_ sender: UISwitch) {
+        valueStepper.autorepeat = sender.isOn
+        
+    }
+    
+    @IBAction func toggleContinuous(_ sender: UISwitch) {
+        valueStepper.isContinuous = sender.isOn
+        
+    }
+    
+    @IBAction func toggleWrap(_ sender: UISwitch) {
+        valueStepper.wraps = sender.isOn
+        
+    }
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        autorepeatSwitch.isOn = valueStepper.autorepeat
+        continuousSwitch.isOn = valueStepper.isContinuous
+        wrapSwitch.isOn = valueStepper.wraps
+        
+    }
+}
+
+_Activity Indicator View
+class ActivityIndicatorViewViewController: UIViewController {
+    
+    @IBOutlet weak var loader: UIActivityIndicatorView!
+    
+    @IBOutlet weak var hiddenSwitch: UISwitch!
+    
+    @IBAction func toggleHidden(_ sender: UISwitch) {
+        loader.hidesWhenStopped = sender.isOn
+    }
+    
+    @IBAction func start(_ sender: Any) {
+        if !loader.isAnimating {
+        loader.startAnimating()
+        }
+    }
+    
+    @IBAction func stop(_ sender: Any) {
+        if loader.isAnimating {
+            loader.stopAnimating()
+        }
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        hiddenSwitch.isOn = loader.hidesWhenStopped
+        loader.startAnimating()
+        
+    }
+}
+
 #####################################################################################2021.07.25_2
 _Slider#1
 class SimpleSliderViewController: UIViewController {
