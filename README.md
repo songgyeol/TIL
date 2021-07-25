@@ -1,4 +1,163 @@
 # TIL
+#####################################################################################2021.07.25_2
+_Slider#1
+class SimpleSliderViewController: UIViewController {
+    
+    @IBOutlet weak var redSlider: UISlider!
+    
+    @IBOutlet weak var greenSlider: UISlider!
+    
+    @IBOutlet weak var blueSlider: UISlider!
+    
+    
+    @IBAction func sliderChanged(_ sender: Any) {
+        
+        let r = CGFloat(redSlider.value)
+        let g = CGFloat(greenSlider.value)
+        let b = CGFloat(blueSlider.value)
+        
+        let color = UIColor(red: r, green: g, blue: b, alpha: 1.0)
+        view.backgroundColor = color
+        
+    }
+    
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        redSlider.value = 1.0
+        greenSlider.value = 1.0
+        blueSlider.value = 1.0
+        
+        //애니메이션 효과 넣기
+        //redSlider.setValue(, animated: <#T##Bool#>)
+        
+        redSlider.minimumValue = 0.0
+        redSlider.maximumValue = 1.0
+    }
+}
+
+_Slider#2
+Custom Slider
+class CustomSliderViewController: UIViewController {
+    @IBOutlet weak var slider: UISlider!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let img = UIImage(systemName: "Lightbuld")
+        
+        slider.setThumbImage(img, for: .normal)
+        
+        slider.minimumTrackTintColor = UIColor.systemRed
+        slider.maximumTrackTintColor = UIColor.black
+        
+        //틴트컬러 이미지
+        //slider.thumbTintColor
+        
+//        slider.setMinimumTrackImage(<#T##image: UIImage?##UIImage?#>, for: <#T##UIControl.State#>)
+//        slider.setMaximumTrackImage(<#T##image: UIImage?##UIImage?#>, for: <#T##UIControl.State#>)
+//
+        
+    }
+}
+
+
+non-continuous Slider
+class CustomSliderViewController: UIViewController {
+    @IBOutlet weak var slider: UISlider!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let img = UIImage(systemName: "Lightbuld")
+        
+        slider.setThumbImage(img, for: .normal)
+        
+        slider.minimumTrackTintColor = UIColor.systemRed
+        slider.maximumTrackTintColor = UIColor.black
+        
+        //틴트컬러 이미지
+        //slider.thumbTintColor
+        
+//        slider.setMinimumTrackImage(<#T##image: UIImage?##UIImage?#>, for: <#T##UIControl.State#>)
+//        slider.setMaximumTrackImage(<#T##image: UIImage?##UIImage?#>, for: <#T##UIControl.State#>)
+//
+        
+    }
+}
+
+
+
+
+#####################################################################################2021.07.25
+_Page Control#1
+class PageControlViewController: UIViewController {
+    @IBOutlet weak var listCollectionView: UICollectionView!
+    
+    
+    @IBOutlet weak var pager: UIPageControl!
+    
+    
+    let list = [UIColor.red, UIColor.green, UIColor.blue, UIColor.gray, UIColor.black]
+    
+    
+    @IBAction func pageChanged(_ sender: UIPageControl) {
+        let indexPath = IndexPath(item: sender.currentPage, section: 0)
+        listCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
+        pager.numberOfPages = list.count
+        pager.currentPage = 0
+        
+        pager.pageIndicatorTintColor = UIColor.systemGray3
+        pager.currentPageIndicatorTintColor = UIColor.systemRed
+        
+    }
+}
+
+
+extension PageControlViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let width = scrollView.bounds.size.width
+        let x = scrollView.contentOffset.x + (width / 2.0)
+        
+        let newPage = Int(x / width)
+        if pager.currentPage != newPage {
+            pager.currentPage = newPage
+        }
+    }
+}
+
+
+
+
+
+extension PageControlViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return list.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        cell.backgroundColor = list[indexPath.item]
+        return cell
+    }
+}
+
+
+extension PageControlViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return collectionView.bounds.size
+    }
+}
+
 #####################################################################################2021.07.24_3
 _Picker View#1. Text Picker
 //Picker View = 슬롯머신형태
