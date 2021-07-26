@@ -1,4 +1,31 @@
 # TIL
+#####################################################################################2021.07.26
+_Progress View
+class ProgressViewViewController: UIViewController {
+  
+    @IBOutlet weak var progress: UIProgressView!
+    
+    
+    
+    @IBAction func update(_ sender: Any) {
+        //progress.progress = 0.8 애니메이션 없이 바로 로드됨
+        progress.setProgress(0.8, animated: true) // 애니메이션 효과
+        
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        progress.progress = 0.0
+        progress.trackTintColor = UIColor.systemGray
+        progress.progressTintColor = .systemRed
+        
+    }
+}
+
+
+
 #####################################################################################2021.07.25_3
 _Switch
 class SwitchViewController: UIViewController {
