@@ -1,4 +1,37 @@
 # TIL
+#####################################################################################2021.07.29_2
+Handling Image and Color
+_Image View
+class ImageAnimationViewController: UIViewController {
+    
+    let images = [
+        UIImage(systemName: "speaker")!,
+        UIImage(systemName: "speaker.1")!,
+        UIImage(systemName: "speaker.2")!,
+        UIImage(systemName: "speaker.3")!
+    ]
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
+    @IBAction func startAnimation(_ sender: Any) {
+        imageView.startAnimating()
+    }
+    
+    @IBAction func stopAnimation(_ sender: Any) {
+        if imageView.isAnimating {
+            imageView.stopAnimating()
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        imageView.animationImages = images
+        
+        imageView.animationDuration = 1.0
+        imageView.animationRepeatCount = 3
+    }
+}
+
 #####################################################################################2021.07.29
 Alert#3😎
 #3😎
