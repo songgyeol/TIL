@@ -1,4 +1,58 @@
 # TIL
+#####################################################################################2021.07.30
+Image#1~#2
+_#1 Image Basic
+class ImageViewController: UIViewController {
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let img1 = UIImage(named: "moongchi")
+        let img2 = #imageLiteral(resourceName: "photo") //Image Litera
+        
+        imageView.image = img1   //nil
+        
+        if let ptSize = img1?.size {
+            print("Image Size: \(ptSize)")
+        }
+        
+        if let ptSize = img1?.size, let scale = img1?.scale {
+            let px = CGSize(width: ptSize.width * scale, height: ptSize.height * scale)
+            print("Image Size(px): \(px)")
+        }
+        //유형
+        img1?.cgImage
+        img1?.ciImage
+        
+        //다른곳으로 전송 및 파일저장
+        let pngData = img1?.pngData()
+        let jpgData = img1?.jpegData(compressionQuality: 1.0)//1.0이 가장 높은품질
+        
+    }
+}
+
+_#2 Image #2 Resizable Image&Vector Image
+class ResizableImageViewController: UIViewController {
+    
+    @IBOutlet weak var btn: UIButton!
+    
+    let btnImage = UIImage(named: "btn")
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let img = btnImage {
+            let capInset = UIEdgeInsets(top: 14, left: 14, bottom: 14, right: 14)
+            
+            let bkgImage = img.resizableImage(withCapInsets: capInset, resizingMode:  .stretch)
+            btn.setBackgroundImage(bkgImage, for: .normal)
+        }
+        
+    }
+
+
 #####################################################################################2021.07.29_2
 Handling Image and Color
 _Image View
