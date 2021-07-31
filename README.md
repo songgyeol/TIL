@@ -1,4 +1,59 @@
 # TIL
+#####################################################################################2021.07.31_3
+Text Field#1~#2
+#1😎 Basic
+class TextFieldViewController: UIViewController {
+    
+    @IBOutlet weak var inputField: UITextField!
+    
+    @IBOutlet weak var valueLabel: UILabel!
+   
+    @IBAction func report(_ sender: Any) {
+        
+        guard let text = inputField.text, text.count > 0 else {
+            return
+        }
+        valueLabel.text = text
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        inputField.placeholder = "Input Value"
+    }
+}
+
+
+#2😎
+Border Style
+class TextFieldBorderStyleViewController: UIViewController {
+    
+    @IBOutlet weak var inputField: UITextField!
+    
+    @IBOutlet weak var borderStyleControl: UISegmentedControl!
+    
+    @IBAction func borderStyleChanged(_ sender: UISegmentedControl) {
+        
+        let index = sender.selectedSegmentIndex
+        let style = UITextField.BorderStyle(rawValue: index) ?? .roundedRect
+        inputField.borderStyle = style
+    }
+    
+    
+    @IBOutlet weak var enabledSwitch: UISwitch!
+    
+    @IBAction func toggleEnabled(_ sender: UISwitch) {
+        inputField.isEnabled = sender.isOn
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+    }
+}
+
 #####################################################################################2021.07.31_2
 Color#1,#2
 _Color#1 Color Basic
