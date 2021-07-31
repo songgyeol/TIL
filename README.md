@@ -1,4 +1,70 @@
 # TIL
+#####################################################################################2021.07.31
+Image#3~#4
+#3_Image#3 Template Images
+class RenderingModeViewController: UIViewController {
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let img = UIImage(named: "clover")?.withRenderingMode(.alwaysTemplate) {
+            imageView.image = img
+        }
+    }
+
+#4_Image#4 Custom Drawing and Resizing
+import UIKit
+import CoreGraphics
+
+class ImageResizingViewController: UIViewController {
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let targetImage = UIImage(named: "photo") {
+            let size = CGSize(width: targetImage.size.width / 5, height: targetImage.size.height / 5)
+            
+            imageView.image = resizingWithImageContext(image: targetImage, to: size)
+        }
+    }
+}
+
+
+
+
+extension ImageResizingViewController {
+    func resizingWithImageContext(image: UIImage, to size: CGSize) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, true, 0.0)
+        
+        let frame = CGRect(origin: CGPoint.zero, size: size)
+        image.draw(in: frame)
+        
+        let resultImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndPDFContext()
+        
+        return resultImage
+        
+    }
+}
+
+
+
+extension ImageResizingViewController {
+    func resizingWithBitmapContext(image: UIImage, to size: CGSize) -> UIImage? {
+        return nil
+    }
+}
+
+
+
+
+
+
 #####################################################################################2021.07.30
 Image#1~#2
 _#1 Image Basic
