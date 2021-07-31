@@ -1,4 +1,125 @@
 # TIL
+#####################################################################################2021.07.31_2
+Color#1,#2
+_Color#1 Color Basic
+class CGColorCIColorViewController: UIViewController {
+    
+    @IBOutlet weak var blueView: UIView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        blueView.layer.borderWidth = 10
+        blueView.layer.borderColor = UIColor.systemYellow.cgColor
+        
+    }
+}
+
+
+_Color#2 Pattern
+#1😎 UIColor
+class UIColorViewController: UIViewController {
+    
+    @IBOutlet weak var targetView: UIView!
+    
+    @IBOutlet weak var redSlider: UISlider!
+    
+    @IBOutlet weak var blueSlider: UISlider!
+    
+    @IBOutlet weak var greenSlider: UISlider!
+    
+    @IBAction func sliderChanged(_ sender: UISlider) {
+        let r = CGFloat(redSlider.value)
+        let g = CGFloat(redSlider.value)
+        let b = CGFloat(redSlider.value)
+        
+        targetView.backgroundColor = UIColor(displayP3Red: r, green: g, blue: b, alpha: 1.0)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        var r = CGFloat(0)
+        var g = CGFloat(0)
+        var b = CGFloat(0)
+        var a = CGFloat(0)
+        
+        targetView.backgroundColor?.getRed(&r, green: &g, blue: &b, alpha: &a)
+        
+        redSlider.value = Float(r)
+        greenSlider.value = Float(g)
+        blueSlider.value = Float(b)
+        
+        
+//        targetView.backgroundColor = UIColor.systemBlue
+//
+//        let color = UIColor(red: 29.0 / 255.0, green: 161.0 / 255.0, blue: 242.0 / 255.0, alpha: 1.0)
+//
+//        UIColor(displayP3Red: 29.0 / 255.0, green: 161.0 / 255.0, blue: 242.0 / 255.0, alpha: 1.0)
+//
+//        UIColor.systemRed.withAlphaComponent(0.5)
+//
+//        UIColor.clear
+        
+    }
+}
+
+
+#2😎 CGColor
+class CGColorCIColorViewController: UIViewController {
+    
+    @IBOutlet weak var blueView: UIView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        blueView.layer.borderWidth = 10
+        blueView.layer.borderColor = UIColor.systemYellow.cgColor
+        
+    }
+}
+
+#3😎 Pattern
+class PatternImageViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if let img = UIImage(named: "pattern") {
+            let patternColor = UIColor(patternImage: img)
+            view.backgroundColor = patternColor
+        }
+    }
+}
+
+
+#4😎 Color Literal
+class ColorSetViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let c = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+        view.backgroundColor = UIColor(named: "PrimaryColor") ?? UIColor.white
+        
+    }
+}
+
+#5😎
+Custom Drawing
+class ColorSetViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let c = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+        view.backgroundColor = UIColor(named: "PrimaryColor") ?? UIColor.white
+        
+    }
+}
+
+
+
 #####################################################################################2021.07.31
 Image#3~#4
 #3_Image#3 Template Images
