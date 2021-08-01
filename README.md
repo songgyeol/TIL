@@ -1,4 +1,88 @@
 # TIL
+#####################################################################################2021.08.01_2
+#😎Text Input Traits #1~#2
+#1
+텍스트 입력
+class CapitalizationViewController: UIViewController {
+    
+    @IBOutlet weak var inputField: UITextField!
+    
+    @IBAction func capitalizationChanged(_ sender: UISegmentedControl) {
+        
+        inputField.resignFirstResponder()
+        
+        let type = UITextAutocapitalizationType(rawValue: sender.selectedSegmentIndex) ?? .none
+        inputField.autocapitalizationType = type
+        
+        inputField.becomeFirstResponder()
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+              
+    }
+}
+
+class CorrectionViewController: UIViewController {
+    @IBOutlet weak var inputField: UITextField!
+    
+    @IBAction func correctionChanged(_ sender: UISegmentedControl) {
+        //편집종료
+        inputField.resignFirstResponder()
+        
+        let type = UITextAutocorrectionType(rawValue: sender.selectedSegmentIndex) ?? .default
+        inputField.autocorrectionType = type
+        //편집다시시작
+        inputField.becomeFirstResponder()
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+}
+
+#2
+#SpellChecking
+//오타 밑줄 빨간색
+class SpellCheckingViewController: UIViewController {
+    
+    @IBOutlet weak var textView: UITextView!
+    
+    @IBAction func spellCheckingChanged(_ sender: UISegmentedControl) {
+    
+        let type = UITextSpellCheckingType(rawValue: sender.selectedSegmentIndex) ?? .default
+        textView.spellCheckingType = type
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+}
+
+
+#SecureTextEntry
+class SecureTextEntryViewController: UIViewController {
+    
+    @IBOutlet weak var passwordField: UITextField!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        passwordField.isSecureTextEntry = true
+        
+    }
+}
+
+#https://ko.wikipedia.org/wiki/줄표#엠_대시(em_dash,_—)
+엠대시, 엔대시
+
+
+
 #####################################################################################2021.08.01_1
 
 #3😎 Text View #3 Data Detections
