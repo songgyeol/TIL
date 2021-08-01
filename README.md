@@ -1,4 +1,20 @@
 # TIL
+#####################################################################################2021.08.01_1
+
+#3😎 Text View #3 Data Detections
+class DataDetectionViewController: UIViewController {
+    
+    @IBOutlet weak var textView: UITextView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        textView.dataDetectorTypes = [.link, .address, .phoneNumber]
+        
+    }
+}
+
+
 #####################################################################################2021.07.31_3
 Text Field#1~#2
 #1😎 Basic
