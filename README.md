@@ -1,4 +1,102 @@
 # TIL
+#####################################################################################2021.08.02
+Software Keyboard #1
+_FirstResponderViewController
+class FirstResponderViewController: UIViewController {
+    
+    @IBOutlet weak var inputField: UITextField!
+    
+    
+    @IBAction func startEditing(_ sender: Any) {
+        inputField.becomeFirstResponder()
+    }
+    
+    @IBAction func endEditing(_ sender: Any) {
+        if inputField.isFirstResponder {
+            inputField.resignFirstResponder()
+        }
+    }
+    //will로 열었으면, dis로 닫아준다 짝을 맞추듯
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        inputField.becomeFirstResponder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+//        if inputField.isFirstResponder {
+//            inputField.resignFirstResponder()
+//        }
+        view.endEditing(true) //위 주석이랑 같은 효과
+    }
+}
+
+_KeyboardTypesViewController.swift
+class KeyboardTypesViewController: UIViewController {
+    
+    @IBOutlet weak var inputField: UITextField!
+    
+    @IBOutlet weak var btn: UIButton!
+    
+    @IBAction func changeKeyboardType(_ sender: Any) {
+        inputField.resignFirstResponder()
+        
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let types: [UIKeyboardType] = [.default, .asciiCapable, .numbersAndPunctuation, .URL, .numberPad, .phonePad, .namePhonePad, .emailAddress, .decimalPad, .twitter, .webSearch, .asciiCapableNumberPad]
+        let typeNames = ["Default", "ASCII Capable", "Numbers And Punctuation", "URL", "Number Pad", "Phone Pad", "Name Phone Pad", "E-mail Address", "Decimal Pad", "Twitter", "Web Search", "ASCII Capable Number Pad"]
+        
+        (0..<types.count).forEach {
+            let type = types[$0]
+            let name = typeNames[$0]
+            
+            let action = UIAlertAction(title: name, style: .default, handler: { (action) in
+                self.inputField.keyboardType = type
+                self.inputField.becomeFirstResponder()
+            })
+            sheet.addAction(action)
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+        sheet.addAction(cancel)
+        
+        if let pc = sheet.popoverPresentationController {
+            pc.sourceView = btn
+        }
+        
+        present(sheet, animated: true, completion: nil)
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        inputField.becomeFirstResponder()
+    }
+}
+
+_KeyboardAppearanceViewController
+class KeyboardAppearanceViewController: UIViewController {
+    
+    @IBOutlet weak var inputField: UITextField!
+    
+    @IBAction func appearanceChanged(_ sender: UISegmentedControl) {
+        let appearance = UIKeyboardAppearance(rawValue: sender.selectedSegmentIndex) ?? .default
+        inputField.keyboardAppearance = appearance
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        inputField.becomeFirstResponder()
+    }
+}
+
+
+
 #####################################################################################2021.08.01_2
 #😎Text Input Traits #1~#2
 #1
