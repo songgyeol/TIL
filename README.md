@@ -1,4 +1,49 @@
 # TIL
+#####################################################################################2021.08.03
+Software Keyboard #2
+class ReturnKeyViewController: UIViewController {
+    
+    @IBOutlet weak var firstInputField: UITextField!
+    
+    @IBOutlet weak var secondInputField: UITextField!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //리턴키 코드
+        secondInputField.enablesReturnKeyAutomatically = true
+        
+    }
+}
+
+extension ReturnKeyViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case firstInputField:
+            secondInputField.becomeFirstResponder()
+        case secondInputField:
+            guard let keyword = secondInputField.text, keyword.count > 0 else {
+                return true
+            }
+            let encodeKeyword = keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? keyword
+            let urlStr = "http://www.google.com/m/search?q=\(encodeKeyword)"
+            guard let url = URL(string: urlStr) else {
+                return true
+            }
+            
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        default:
+            break
+        }
+        return true
+        //델리게이트에서 구현하면 리턴키를 탭할때마다 반복적으로 호출한다
+    }
+}
+
+
+
 #####################################################################################2021.08.02
 Software Keyboard #1
 _FirstResponderViewController
