@@ -1,4 +1,49 @@
 # TIL
+#####################################################################################2021.08.04
+Software Keyboard #3
+//Notification 이름을 주석으로 추가해둠
+// UIResponder.keyboardDidHideNotification
+// UIResponder.keyboardDidShowNotification
+// UIResponder.keyboardWillHideNotification
+// UIResponder.keyboardWillShowNotification
+// UIResponder.keyboardWillChangeFrameNotification
+// UIResponder.keyboardDidChangeFrameNotification
+
+
+class KeyboardNotificationViewController: UIViewController {
+    
+    @IBOutlet var textView: UITextView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: .main) { (noti) in
+            
+            guard let userInfo = noti.userInfo else { return }
+            
+            guard let frame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as?
+                    CGRect else { return }
+            
+            var inset = self.textView.contentInset
+            inset.bottom = frame.height
+            self.textView.contentInset = inset
+            
+            self.textView.scrollIndicatorInsets = inset
+        }
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: .main) { (noti) in
+            
+            var inset = self.textView.contentInset
+            inset.bottom = 8
+            self.textView.contentInset = inset
+            
+            self.textView.scrollIndicatorInsets = inset
+        }
+        
+    }
+}
+
+
+
 #####################################################################################2021.08.03
 Software Keyboard #2
 class ReturnKeyViewController: UIViewController {
