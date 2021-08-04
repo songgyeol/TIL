@@ -1,4 +1,93 @@
 # TIL
+#####################################################################################2021.08.04_3
+Input View& Input Accessory View
+class InputViewViewController: UIViewController {
+    
+    
+    @IBOutlet var accessoryBar: UIToolbar!
+    
+    
+    @IBOutlet var pickerContainerView: UIView!
+    
+    
+    @IBOutlet var buttonContainerView: UIView!
+    
+    
+    @IBAction func selectGender(_ sender: UIButton) {
+        
+        genderField.text = sender.tag == 0 ? "M" : "F"
+        
+        UIDevice.current.playInputClick()
+    }
+    
+    @IBAction func movePrevious(_ sender: Any) {
+        if genderField.isFirstResponder {
+            ageField.becomeFirstResponder()
+        } else if ageField.isFirstResponder {
+            nameField.becomeFirstResponder()
+        }
+    }
+    
+    @IBAction func moveNext(_ sender: Any) {
+        if nameField.isFirstResponder {
+            ageField.becomeFirstResponder()
+        } else if ageField.isFirstResponder {
+            genderField.becomeFirstResponder()
+        }
+    }
+    
+    @IBOutlet weak var nameField: UITextField!
+    
+    @IBOutlet weak var ageField: UITextField!
+    
+    @IBOutlet weak var genderField: UITextField!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        ageField.inputView = pickerContainerView
+        genderField.inputView = buttonContainerView
+        
+        
+        nameField.inputAccessoryView = accessoryBar
+        ageField.inputAccessoryView = accessoryBar
+        genderField.inputAccessoryView = accessoryBar
+    }
+}
+
+
+class GenderInputView: UIView, UIInputViewAudioFeedback {
+    var enableInputClicksWhenVisible: Bool {
+        return true
+    }
+}
+
+
+
+
+
+extension InputViewViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 100
+    }
+}
+
+extension InputViewViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "\(row + 1)"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        ageField.text = "\(row + 1)"
+    }
+}
+
+
 #####################################################################################2021.08.04
 Text Delegates #1~#3
 //Name,Age,Gender,Email
