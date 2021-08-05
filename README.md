@@ -1,4 +1,34 @@
 # TIL
+#####################################################################################2021.08.05
+Date
+#Date Type and Reference Date
+Reference date: 2001-01-01 00:00:00 / UTC
+
+let now = Date()
+print(now)
+
+var dt = Date(timeIntervalSinceReferenceDate: 60 * 60)
+print(dt)
+
+dt = Date(timeIntervalSinceReferenceDate: -60 * 60)
+print(dt)
+
+
+#TimeInterval
+let oneSec = TimeInterval(1)
+
+let oneMillisecond = TimeInterval(0.001)
+
+let oneMin = TimeInterval(60)
+let oneHour = TimeInterval(oneMin * 60) //= (60 * 60)
+let oneDay = TimeInterval(oneHour * 24)
+
+Date(timeIntervalSinceNow: oneDay)
+
+
+
+
+
 #####################################################################################2021.08.04_3
 Input View& Input Accessory View
 class InputViewViewController: UIViewController {
