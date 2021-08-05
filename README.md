@@ -1,4 +1,98 @@
 # TIL
+#####################################################################################2021.08.05_2
+Calendar and Date Components
+#Calendar
+//국가별 달력이 다양하기 때문에 특정해서 사용해야 함.
+Calendar.Identifier.gregorian//comm+cont+클릭(Identifier)
+
+Calendar.current //아이폰설정상, 설정 바꿔도 최초달력 유지
+Calendar.autoupdatingCurrent //아이폰설정상, 바꾼 달력으로 유지
+
+
+
+#DateComponents
+let now = Date()
+
+let calendar = Calendar.current
+
+let components = calendar.dateComponents([.year, .month, .day], from: now)
+components.year
+components.month
+components.day
+//여러가지를 볼 때
+
+let year = calendar.component(.year, from: now)
+//하나의 값만 볼 때
+
+//새로운 날짜
+var memorialDayComponents = DateComponents()
+memorialDayComponents.year = 2014
+memorialDayComponents.month = 4
+memorialDayComponents.day = 16
+
+let memorialDay = calendar.date(from: memorialDayComponents)
+
+
+#Date Calculation
+extension Date {
+    init?(year: Int, month: Int, day: Int, hour: Int = 0, minute: Int = 0, second: Int = 0, calendar: Calendar = .current) {
+        var components = DateComponents()
+        components.year = year
+        components.month = month
+        components.day = day
+        components.hour = hour
+        components.minute = minute
+        components.day = day
+        
+        guard let date = calendar.date(from: components) else {
+            return nil
+        }
+        
+        self = date
+    }
+}
+
+let calendar = Calendar.current
+let worldCup2002 = Date(year: 2002, month: 5, day: 31)!
+
+//100일 뒤 날짜 설정
+let now = Date()
+let today = calendar.startOfDay(for: now) //기준날짜 설정 00:00분
+
+var comps = DateComponents()
+comps.day = 100 //100일 전 날짜를 하고 싶으면 -100
+comps.hour = 12 // 시간부분을 생각해서 계산해야 된다.  하루 차이가 날 수 있음
+
+calendar.date(byAdding: comps, to: now)
+calendar.date(byAdding: comps, to: today) //시간 뺀 날짜만
+
+comps = calendar.dateComponents([.day], from: worldCup2002, to: today)
+comps.day
+
+
+#TimeZone
+//한국 Korean Standard Time(KST)
+let calendar = Calendar.current
+var components = DateComponents()
+components.year = 2014
+components.month = 4
+components.day = 16
+//서울/아시아로 타임존 설정
+components.timeZone = TimeZone(identifier: "Asia/Seoul")
+calendar.date(from: components)
+
+components.timeZone = TimeZone(identifier: "America/Los_Angels")
+calendar.date(from: components)
+
+
+
+for name in TimeZone.knownTimeZoneIdentifiers {
+    print(name)
+}//Asia/Seoul
+
+
+
+
 #####################################################################################2021.08.05
 Date
 #Date Type and Reference Date
