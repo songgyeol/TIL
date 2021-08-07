@@ -1,4 +1,42 @@
 # TIL
+#####################################################################################2021.08.07_2
+CountDown Timer
+class CountDownTimerViewController: UIViewController {
+    
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    
+    @IBOutlet weak var picker: UIDatePicker!
+    
+    @IBAction func start(_ sender: Any) {
+        timeLabel.text = "\(Int(picker.countDownDuration))"
+    
+            remainingSeconds = Int(picker.countDownDuration)
+    
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
+            self.remainingSeconds -= 1
+            self.timeLabel.text = "\(self.remainingSeconds)"
+            
+            if self.remainingSeconds == 0 {
+                timer.invalidate()
+                AudioServicesPlaySystemSound(1315)
+            }
+        }
+    }
+    
+    var remainingSeconds = 0
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        picker.countDownDuration = 60//원하는 시간을 초 단위로
+        
+        
+    }
+}
+
+
+
 #####################################################################################2021.08.07
 Date Picker
 class DatePickerModeViewController: UIViewController {
