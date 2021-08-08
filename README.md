@@ -1,4 +1,26 @@
 # TIL
+#####################################################################################2021.08.08
+#DateFormatter
+//문자를 날짜로 날짜를 문자로
+let now = Date()
+//print(now)
+
+let formatter = DateFormatter()
+formatter.dateStyle = .full
+formatter.timeStyle = .medium
+formatter.locale = Locale(identifier: "ko_kr")
+
+
+var result = formatter.string(from: now)
+print(result)
+
+//formatter.string(for: <#T##Any?#>)
+
+result = DateFormatter.localizedString(from: now, dateStyle: .long, timeStyle: .short)
+print(result)
+
+
+
 #####################################################################################2021.08.07_2
 CountDown Timer
 class CountDownTimerViewController: UIViewController {
