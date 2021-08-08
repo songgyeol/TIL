@@ -1,4 +1,23 @@
 # TIL
+#####################################################################################2021.08.08_3
+#Relative Date Formatting
+let now = Date()
+let yesterday = now.addingTimeInterval(3600 * -24)
+let tomorrow = now.addingTimeInterval(3600 * 24)
+
+let formatter = DateFormatter()
+formatter.locale = Locale(identifier: "ko_KR")
+formatter.dateStyle = .full
+formatter.timeStyle = .none
+formatter.doesRelativeDateFormatting = true
+
+
+print(formatter.string(from: now))
+print(formatter.string(from: yesterday))
+print(formatter.string(from: tomorrow))
+formatter.doesRelativeDateFormatting = true
+
+
 #####################################################################################2021.08.08_2
 #Custom Format
 NSDateFormatter.com
