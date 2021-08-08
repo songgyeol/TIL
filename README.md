@@ -1,4 +1,45 @@
 # TIL
+#####################################################################################2021.08.08_5
+#Date String Parsing
+let str = "2017-09-02T09:30:00Z"
+let formatter = DateFormatter()
+
+formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+
+if let date = formatter.date(from: str) {
+    formatter.dateStyle = .full
+    formatter.timeStyle = .full
+    
+    print(formatter.string(from: date))
+    
+} else {
+    print("invalid format")
+    
+}
+#####################################################################################2021.08.08_4
+#Symbols
+#Symbols 
+let now = Date()
+let weekdaySymbols = ["☀️", "🌕", "🔥", "💧", "🌲", "🥇", "🌏"]
+let am = "🌅"
+let pm = "🌇"
+
+let formatter = DateFormatter()
+formatter.dateStyle = .full
+formatter.timeStyle = .full
+
+formatter.amSymbol = am
+formatter.pmSymbol = pm
+
+print(formatter.string(from: now))
+
+formatter.weekdaySymbols = weekdaySymbols
+
+print(formatter.string(from: now))
+
+
+
+
 #####################################################################################2021.08.08_3
 #Relative Date Formatting
 let now = Date()
