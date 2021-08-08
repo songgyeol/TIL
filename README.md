@@ -1,4 +1,44 @@
 # TIL
+#####################################################################################2021.08.08_2
+#Custom Format
+NSDateFormatter.com
+
+let now = Date()
+let formatter = DateFormatter()
+
+formatter.locale = Locale(identifier: "en_US")
+formatter.setLocalizedDateFormatFromTemplate("yyyyMMMMdE")
+var result = formatter.string(from: now)
+print(result, formatter.dateFormat)
+
+formatter.locale = Locale(identifier: "ko_KR")
+formatter.setLocalizedDateFormatFromTemplate("yyyyMMMMdE")
+result = formatter.string(from: now)
+print(result, formatter.dateFormat)
+
+formatter.dateFormat = "yyyyMMMMdE"
+result = formatter.string(from: now)
+print(result)
+
+
+#Relative Date Formatting
+let now = Date()
+let yesterday = now.addingTimeInterval(3600 * -24)
+let tomorrow = now.addingTimeInterval(3600 * 24)
+
+let formatter = DateFormatter()
+formatter.locale = Locale(identifier: "ko_KR")
+formatter.dateStyle = .full
+formatter.timeStyle = .none
+formatter.doesRelativeDateFormatting = true
+
+
+print(formatter.string(from: now))
+print(formatter.string(from: yesterday))
+print(formatter.string(from: tomorrow))
+formatter.doesRelativeDateFormatting = true
+
+
 #####################################################################################2021.08.08
 #DateFormatter
 //문자를 날짜로 날짜를 문자로
