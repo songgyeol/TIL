@@ -1,4 +1,75 @@
 # TIL
+#####################################################################################2021.08.10
+#ISO8601DateFormatter
+let str = "2017-09-02"
+
+let formatter = ISO8601DateFormatter()
+formatter.formatOptions = [.withYear, .withMonth, .withDay, .withDashSeparatorInDate] // =[withFullDate]
+
+if let date = formatter.date(from: str) {
+    formatter.formatOptions = [.withInternetDateTime]
+    print(formatter.string(from: date))
+    
+} else {
+    print("inavalid format")
+}
+
+
+#DateIntervalFormatter
+let startDate = Date()
+let endDate = startDate.addingTimeInterval(3600 * 24 * 3)
+
+let formatter = DateFormatter()
+formatter.locale = Locale(identifier: "ko_KR")
+formatter.dateStyle = .long
+formatter.timeStyle = .short
+
+print("\(formatter.string(from: startDate)) - \(formatter.string(from: endDate))")
+
+let intervalFormatter = DateIntervalFormatter()
+intervalFormatter.locale = Locale(identifier: "ko_KR")
+//intervalFormatter.dateStyle = .long
+//intervalFormatter.timeStyle = .short
+intervalFormatter.dateTemplate = "yyyyMMMdE"
+
+
+
+print(intervalFormatter.string(from: startDate, to: endDate))
+
+
+
+#DateComponentsFormatter
+let startDate = Date()
+let endDate = startDate.addingTimeInterval(3600 * 24 * 30)
+
+let formatter = DateComponentsFormatter()
+formatter.unitsStyle = .full
+
+if let result = formatter.string(from: startDate, to: endDate) {
+    print(result)
+}
+
+var comps = DateComponents()
+comps.day = 0
+comps.hour = 1
+comps.minute = 30
+comps.minute = 0
+comps.second = 7
+
+formatter.unitsStyle = .positional //재생시간같이 표기 코드 ex)1:00:07
+formatter.zeroFormattingBehavior = .pad  //4 weeks, 2 days 0d 01:00:07
+
+
+//ex)90분으로 설정코드 = formatter.allowedUnits = [.minute]
+//반올림 코드 = formatter.maximumUnitCount = 1
+//remaining 남은시간 표시코드 = formatter.includesTimeRemainingPhrase = true
+//remaining랑 같이 사용하는 코드 about = formatter.includesApproximationPhrase = true
+
+if let result = formatter.string(from: comps) {
+    print(result)
+}
+
+
 #####################################################################################2021.08.09
 #ISO8601Date~
 #Table View
