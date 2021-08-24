@@ -1,4 +1,17 @@
 # TIL
+#####################################################################################2021.08.24
+
+Table View Basic
+//Delegate Pattern을 활용해서 테이블 뷰를 구현하는 방법
+class TableViewBasicsViewController: UIViewController {
+    
+    let list = ["iPhone", "iPad", "Apple Watch", "iMac Pro", "iMac 5K", "Macbook Pro", "Apple TV"]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+}
 #####################################################################################2021.08.15_2
 commit erreor 403??????????????
 #Table View Basic = Delegate Pattern을 활용해서 테이블 뷰를 구현하는 방법
