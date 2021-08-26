@@ -1,6 +1,34 @@
 # TIL
-#####################################################################################2021.08.24
+#####################################################################################2021.08.26
+class TableViewBasicsViewController: UIViewController {
+    
+    let list = ["iPhone", "iPad", "Apple Watch", "iMac Pro", "iMac 5K", "Macbook Pro", "Apple TV"]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+}
 
+extension TableViewBasicsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("#1", #function)
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("#2", #function, indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        //cell.textLabel?.text = list[indexPath.row]
+        
+        cell.textLabel?.text = "\(indexPath.section) - \(indexPath.row)"
+        return cell
+    }
+    
+    
+}
+
+#####################################################################################2021.08.24
 Table View Basic
 //Delegate Pattern을 활용해서 테이블 뷰를 구현하는 방법
 class TableViewBasicsViewController: UIViewController {
