@@ -1,4 +1,12 @@
 # TIL
+#####################################################################################2021.08.28_2
+Weather API
+//https://openweathermap.org
+//songgyeol@kakao.com / song167855 / IOS
+//weather dater code :7321aa59b6ca9072137e5b4b951757aa
+let apikey = "7321aa59b6ca9072137e5b4b951757aa"
+
+
 #####################################################################################2021.08.28
 KXCWeatherApp
 import UIKit
