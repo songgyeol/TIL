@@ -1,4 +1,39 @@
 # TIL
+#####################################################################################2021.08.30_2
+ForecastTableViewCell
+import UIKit
+
+class ForecastTabelViewCell: UITableViewCell {
+
+    static let identifier = "ForecastTableViewCell"
+    
+    @IBOutlet weak var dateLable: UILabel!
+    
+    @IBOutlet weak var timeLabel: UILabel!
+    
+    @IBOutlet weak var weaterImageView: UIImageView!
+    
+    @IBOutlet weak var statusLabel: UILabel!
+    
+    
+    @IBOutlet weak var temperatureLabel: UILabel!
+    
+    
+    
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        // Inatialization code
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+
+}
+
 #####################################################################################2021.08.30
 SummaryTableViewCell
 import UIKit
