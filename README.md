@@ -1,5 +1,35 @@
 # TIL
-#####################################################################################2021.08.20
+#####################################################################################2021.08.30
+SummaryTableViewCell
+import UIKit
+
+class SummaryTableViewCell: UITableViewCell {
+
+    static let identifier = "SummaryTableViewCell"
+    
+    @IBOutlet weak var weatherImageView: UIImageView!
+    
+    @IBOutlet weak var StatusLabel: UILabel!
+    
+    @IBOutlet weak var minMaxLabel: UILabel!
+    
+    @IBOutlet weak var currentTemperatureLabel: UILabel!
+    
+    
+    
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        //Initialization code
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+
+#####################################################################################2021.08.29
 //섭씨로 변경, units = metric
 //언어 변경, lang = kr
 
