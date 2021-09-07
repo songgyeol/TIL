@@ -1,4 +1,37 @@
 # TIL
+#####################################################################################2021.09.07_2
+변수(Variable)/데이터타입_타입_Alias
+타입애일리어스(Type Alias)
+별칭 붙이기
+
+// 기존에 선언되어있는 타입에 새로운 별칭을 붙여 코드 가독성을 높이는 문법
+// (수학에서 치환과 유사)
+
+
+// 왼쪽에 치환된 별칭이 위치
+typealias Name = String
+
+
+
+// Name타입이 의미하는 것은 String과 완전히 동일
+let name: Name = "홍길동"
+
+
+
+// 스위프트에서는 어떤 형태든 치환이 가능
+
+typealias Something = (Int) -> String
+
+
+func someFunction(completionHandler: (Int) -> String) {
+ 
+}
+
+
+func someFunction2(completionHandler: Something) {
+ 
+}
+
 #####################################################################################2021.09.07_1
 변수(Variable)/데이터타입_타입
 #변수 선언의 정식 문법
