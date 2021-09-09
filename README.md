@@ -1,4 +1,98 @@
 # TIL
+#####################################################################################2021.09.09
+#연습문제(가위바위보,랜덤빙고)
+#가위바위보
+// 조건
+// 1) 가위 => 0
+// 2) 바위 => 1
+// 3) 보  => 2
+var computerChoice = Int.random(in: 0...2)
+var myChoice = 2
+
+switch computerChoice {
+case 0:
+    print("컴은 가위.")
+case 1:
+    print("컴은 바위.")
+case 2:
+    print("컴은 보.")
+default:
+    break
+}
+
+switch myChoice {
+case 0:
+    print("나는 가위.")
+case 1:
+    print("나는 바위.")
+case 2:
+    print("나는 보.")
+default:
+    break
+}
+
+if myChoice == 0 {
+    if computerChoice == 0 {
+        print("비겼습니다.")
+    }
+    else if computerChoice == 1 {
+        print("졌습니다.")
+    }
+    else if computerChoice == 2 {
+        print("이겼습니다.")
+    }
+}
+else if myChoice == 1 {
+    if computerChoice == 0 {
+        print("이겼습니다.")
+    }
+    if computerChoice == 1 {
+        print("비겼습니다.")
+    }
+    if computerChoice == 2 {
+        print("졌습니다.")
+    }
+}
+else if myChoice == 2 {
+    if computerChoice == 0 {
+        print("졌습니다.")
+    }
+    if computerChoice == 1 {
+        print("이겼습니다.")
+    }
+    if computerChoice == 2 {
+        print("비겼습니다.")
+    }
+}
+
+
+
+if myChoice == computerChoice {  // 무승부의 경우를 먼저 정의 ===> 이긴 경우 ===> 나머지
+    print("무승부 입니다.")
+} else if myChoice == 0 && computerChoice == 2 {
+    print("당신이 이겼습니다.")
+} else if myChoice == 1 && computerChoice == 0 {
+    print("당신이 이겼습니다.")
+} else if myChoice == 2 && computerChoice == 1 {
+    print("당신이 이겼습니다.")
+} else {
+    print("당신은 졌습니다.")
+}
+
+
+
+#랜덤 빙고
+var guest: Int = Int.random(in: 1...10)
+var me: Int = 8
+
+if guest > me {
+    print("업")
+} else if guest < me {
+    print("다운")
+} else {
+    print("빙고")
+}
+
 #####################################################################################2021.09.08_2
 #Switch문의 활용
 스위치문과 밸류바인딩(Value Binding)
