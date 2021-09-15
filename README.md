@@ -1,4 +1,30 @@
 # TIL
+#####################################################################################2021.09.15_4
+Optional응용
+함수와 옵셔널 타입의 사용
+옵셔널타입의 파라미터 사용
+
+// 옵셔널 파라미터 사용 함수의 정의
+
+func doSomePrint(with label: String, name: String? = nil) {   // String? = nil
+    print("\(label): \(name)")
+}
+
+
+// 함수의 실행
+
+//doSomePrint(with: <#T##String#>, name: <#T##String?#>)
+
+
+doSomePrint(with: "레이블", name: "스티브 잡스")
+
+doSomePrint(with: "레이블", name: nil)
+
+doSomePrint(with: "레이블")
+
+
+일반적으로는 String? = nil (기본값까지 설정해서, 함수를 유연하게 사용하도록 함)
+
 #####################################################################################2021.09.15_3
 Optional 추출
 옵셔널 타입 사용하기
