@@ -1,4 +1,107 @@
 # TIL
+#####################################################################################2021.09.21
+Part_9 Collection _2
+#삽입하기 (insert)
+var alphabet = ["A", "B", "C", "D", "E", "F", "G"]
+
+// 앞 또는 중간에 삽입하기
+
+alphabet.insert("c", at: 4)
+
+//alphabet.insert("c", at: alphabet.endIndex)
+
+
+alphabet.insert(contentsOf: ["a","b","c"], at: 0)
+
+//alphabet.insert(contentsOf: ["a","b","c"], at: alphabet.endIndex)
+
+
+#교체하기 (replace)
+alphabet = ["A", "B", "C", "D", "E", "F", "G"]
+
+
+// 요소 교체하기
+alphabet[0] = "a"
+
+
+// 범위를 교체하기
+alphabet[0...2] = ["x", "y", "z"]
+
+
+// 원하는 범위 삭제
+alphabet[0...1] = []
+alphabet
+
+
+// 교체하기 함수 문법
+
+alphabet.replaceSubrange(0...2, with: ["a", "b", "c"])
+
+
+#추가하기 (append)
+alphabet = ["A", "B", "C", "D", "E", "F", "G"]
+
+
+alphabet += ["H"]
+
+
+
+// 추가하기 함수 문법
+
+alphabet.append("H")   // 맨 마지막에 추가하는 것
+
+alphabet.append(contentsOf: ["H", "I"])
+
+
+
+//alphabet.append(7)   // 에러 ===> 동일한 자료형만 저장가능함
+
+
+
+#삭제(제거)하기 (remove)
+alphabet = ["A", "B", "C", "D", "E", "F", "G"]
+
+// 서브스크립트 문법으로 삭제
+
+alphabet[0...2] = []   //빈배열 전달하면 해당 범위가 삭제
+
+
+// 요소 한개 삭제
+alphabet.remove(at: 2)  // 삭제하고, 삭제된 요소 리턴
+//alphabet.remove(at: 8)    // 잘못된 인덱스 전달 ====> 에러발생
+
+
+// 요소 범위 삭제
+alphabet.removeSubrange(0...2)
+
+
+
+alphabet = ["A", "B", "C", "D", "E", "F", "G"]
+
+
+alphabet.removeFirst()   // 맨 앞에 요소 삭제하고 삭제된 요소 리턴 (리턴형 String)
+alphabet.removeFirst(2)   // 앞의 두개의 요소 삭제 ===> 리턴은 안함
+
+
+alphabet.removeLast()   // 맨 뒤에 요소 삭제하고 삭제된 요소 리턴 (리턴형 String)
+alphabet.removeLast(2)
+
+
+
+// 배열이 비어있는지도 잘 확인해보고 삭제(제거)해야함 =======> 에러
+// alphabet.removeFirst()    // 리턴형 String
+// alphabet.removeLast()     // 리턴형 String
+
+
+
+
+// 배열의 요소 모두 삭제(제거)
+alphabet.removeAll()
+alphabet.removeAll(keepingCapacity: true)  // 저장공간을 일단은 보관해 둠. (안의 데이터만 일단 날림)
+
+
+
+
 #####################################################################################2021.09.18
 Part9~10_2
 #####################################################################################2021.09.17
