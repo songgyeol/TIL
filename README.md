@@ -1,4 +1,117 @@
 # TIL
+#####################################################################################2021.09.21_1
+
+Part_9 Collection _3
+
+#배열의 기타 기능
+var nums = [1, 2, 3, 1, 4, 5, 2, 6, 7, 5, 0]
+
+// 배열을 정리해보기
+
+// 1) 배열을 직접정렬하는 메서드  sort  (동사)
+// 2) 정렬된 새로운 배열을 리턴  sorted (동사ing/동사ed)
+
+
+
+nums.sort()   // 배열을 직접 정렬 (오름차순) (배열리턴 하지 않음)
+nums.sorted()    //오름차순으로 정렬
+
+
+nums.reverse()   // 요소를 역순으로 정렬  (배열리턴 하지 않음)
+nums.reversed()
+
+
+nums.sorted().reversed()
+// 새로운 배열은 생성하지 않고, 배열의 메모리는 공유하면서 역순으로 열거할 수 있는 형식을 리턴
+
+
+
+// 배열을 랜덤으로 섞기
+
+//nums.shuffle()    // 요소의 순서 랜덤으로 직접 바꾸기
+//nums.shuffled()
+
+
+#배열의 비교
+let a = ["A", "B", "C"]
+let b = ["a", "b", "c"]
+
+
+// 두 배열을 비교해보기
+
+a == b   // false
+a != b   // true
+
+// 개별요소 비교, 저장순서도 비교 하기 때문에
+
+
+#활용
+// 특정 요소 한개 삭제하기
+// ===> 직접 삭제는 불가 (1) 인덱스 찾아서, (2) 인덱스에 해당하는 요소 지우기
+
+var puppy1 = ["p", "u", "p", "p", "y"]
+
+
+
+if let lastIndexOfP = puppy1.lastIndex(of: "p") {
+    puppy1.remove(at: lastIndexOfP)
+}
+
+
+
+if !nums.isEmpty {            // "!"(true ====> false)  (false ====> true)
+    print("\(nums.count) element(s)")
+} else {
+    print("empty array")
+}
+
+
+// 배열의 배열 접근
+
+var data = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+data[0][2]
+
+
+#반복문과의 결합
+// 각 요소에 차례대로 접근, 배열과 반복문은 필연적으로 많이 쓰임
+
+for i in nums {
+    print(i)
+}
+
+
+#enumerate: 영어로 열거하다는 뜻
+// enumerated() ===> 열거된 것들을 Named 튜플 형태로 한개씩 전달
+
+// 데이터 바구니이기 때문에,
+// 실제 번호표(index)까지 붙여서, 차례대로 하나씩 꺼내서 사용하는 경우가 많을 수 있어서 아래처럼 활용 가능
+
+nums = [10, 11, 12, 13, 14]
+
+
+// (offset: 0, element: 10)
+
+
+for tuple in nums.enumerated() {
+    //print(tuple)
+    print("\(tuple.0) - \(tuple.1)")
+}
+
+
+
+
+for (index, word) in nums.enumerated() {      // 바로 뽑아내기
+    print("\(index) - \(word)")
+}
+
+
+
+
+for (index, value) in nums.enumerated().reversed() {      // 거꾸로 뒤에서 부터
+    print("\(index) - \(value)")
+}
+
 #####################################################################################2021.09.21
 Part_9 Collection _2
 #삽입하기 (insert)
