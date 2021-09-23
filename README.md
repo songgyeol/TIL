@@ -1,4 +1,41 @@
 # TIL
+#####################################################################################2021.09.23_2
+import UIKit
+
+class ViewController: UIViewController {
+
+    @IBOutlet weak var mainLabel: UILabel!
+    
+    @IBOutlet weak var myButton: UIButton!
+    
+    //앱의 화면에 들어오면 처음 실행시키는 함수
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
+        mainLabel.backgroundColor = UIColor.yellow
+        
+    }
+    
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        
+        
+        
+        mainLabel.text = "안녕하세요"
+        mainLabel.backgroundColor = UIColor.yellow
+        mainLabel.textColor = #colorLiteral(red: 0.1764705926, green: 0.01176470611, blue: 0.5607843399, alpha: 1) //Color Literal
+        //글자정렬
+        mainLabel.textAlignment = NSTextAlignment.left
+                //속성보면 타입나옴 복사해서 붙이기
+        //버튼글자색
+        myButton.backgroundColor = .yellow
+        myButton.setTitleColor(.black, for: .normal)
+    
+    
+    }
+    
+    
+
+}
 #####################################################################################2021.09.23_1
 #import UIKit
 
