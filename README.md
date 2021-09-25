@@ -1,4 +1,39 @@
 # TIL
+#####################################################################################2021.09.25
+#Dice Game
+import UIKit
+
+class ViewController: UIViewController {
+
+    @IBOutlet weak var firstImageView: UIImageView!
+    @IBOutlet weak var secondImageView: UIImageView!
+    //주사위 바구니 만들기
+    var diceArray: [UIImage] = [#imageLiteral(resourceName: "black1"), #imageLiteral(resourceName: "black2"), #imageLiteral(resourceName: "black3"), #imageLiteral(resourceName: "black4"), #imageLiteral(resourceName: "black5"), #imageLiteral(resourceName: "black6")]
+     
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    //시작 다이스 이미지 변경하는 법
+        firstImageView.image = diceArray[5]
+        secondImageView.image = diceArray[5]
+        
+        
+    }
+
+    @IBAction func rollButtonTapped(_ sender: UIButton) {
+        //첫번째 이미지뷰의 이미지를 랜덤으로 변경
+        //firstImageView.image = //랜덤이미지
+        firstImageView.image = diceArray.randomElement()
+        
+        
+        //두번째 이미지뷰의 이미지를 랜덤으로 변경
+        secondImageView.image = diceArray.randomElement()
+    
+    }
+    
+    
+}
+
 #####################################################################################2021.09.24
 Dice Game
 
