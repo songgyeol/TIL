@@ -1,4 +1,123 @@
 # TIL
+#####################################################################################2021.09.30
+Class and Struct
+Part 11 - 클래스(Class)와 구조체(Struct)
+1) 클래스(Class)
+
+클래스의 정의와 객체의 생성
+
+
+// 붕어빵틀 만들기
+
+class Dog {
+    var name = "강아지"
+    var weight = 0
+    
+    func sit() {
+        print("앉았습니다.")
+    }
+    
+    func layDown() {
+        print("누웠습니다.")
+    }
+}
+
+
+
+
+// 붕어빵 찍어내기 (객체의 생성)
+
+var bori = Dog()
+
+
+// 객체의 속성에 접근
+
+bori.name
+bori.name = "보리"
+bori.name
+
+bori.weight
+bori.weight = 15
+bori.weight
+
+bori.sit()
+bori.layDown()
+
+
+
+// 붕어빵 찍어내기 (객체의 생성)
+
+var choco = Dog()
+
+
+// 객체의 속성에 접근
+
+choco.name
+choco.name = "초코"
+choco.name
+
+choco.weight
+choco.weight = 10
+choco.weight
+
+choco.sit()
+choco.layDown()
+
+
+2) 구조체(Struct)
+
+구조체의 정의와 instance의 생성
+// 붕어빵틀 만들기
+
+struct Bird {
+    var name = "새"
+    var weight = 0.0
+    
+    func fly() {
+        print("날아갑니다.")
+    }
+}
+
+
+
+
+// 붕어빵 찍어내기 (인스턴스의 생성)
+
+var aBird = Bird()
+
+
+// 인스턴스의 속성에 접근
+
+aBird.name
+//aBird.name = "참새1"
+//aBird.name
+
+aBird.weight
+aBird.weight = 0.3
+aBird.weight
+
+aBird.fly()
+
+
+
+
+// 붕어빵 찍어내기 (인스턴스의 생성)
+
+var bBird = Bird()
+
+
+// 인스턴스의 속성에 접근
+
+bBird.name
+bBird.name = "참새2"
+bBird.name
+
+bBird.weight
+bBird.weight = 0.35
+bBird.weight
+
+bBird.fly()
+
 #####################################################################################2021.09.29
 Method
 
