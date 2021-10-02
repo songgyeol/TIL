@@ -1,4 +1,55 @@
 # TIL
+#####################################################################################2021.10.02_2
+Class연습
+//Class 연습
+
+var greeting = "Hello, playground"
+
+
+class Book {
+    var name: String
+    var price: Int
+    var company: String
+    var author: String
+    var pages: Int
+    
+    init(n: String, p: Int, c: String, a: String, ps: Int) {
+        self.name = n
+        self.price = p
+        self.company = c
+        self.author = a
+        self.pages = ps
+    }
+}
+
+var book1 = Book(n: "스위프트", p: 10000, c: "인프런", a: "앨런", ps: 600)
+var book2 = Book(n: "회계원리", p: 20000, c: "아이파", a: "김승철", ps: 500)
+
+book2.name
+
+
+//
+class Movie {
+    var name: String
+    var jenre: String
+    var actor: String
+    var director: String
+    var day: String
+    
+    init(name: String, jenre: String, actor: String, director: String, day: String) {
+        self.name = name
+        self.jenre = jenre
+        self.actor = actor
+        self.director = director
+        self.day = day
+    }
+}
+
+var movie = Movie(name: "맨인더다크", jenre: "스릴러", actor: "할배", director: "누구?", day: "몇 년 전 쯤?")
+//애플에서도 구조체(Struct),클래스(Class) 중 구조체를 선호 (상속이 반드시 필요할 떈 클래스를 사용)
+
+
+
 #####################################################################################2021.10.02_1
 Initializer(초기화)
 #구조체, 클래스의 초기화의 의미
