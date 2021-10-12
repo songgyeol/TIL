@@ -1,4 +1,70 @@
 # TIL
+#####################################################################################2021.10.12_5
+필수생성자 Required
+#필수 생성자
+필수 생성자(Required Initializers)
+
+class Aclass {
+    var x: Int
+    required init(x: Int) {
+        self.x = x
+    }
+}
+
+
+// 클래스 생성자 앞에 required(요구된/필수의) 키워드 사용시
+// 하위 생성자는 반드시 해당 필수 생성자를 구현 해야함
+
+
+
+class Bclass: Aclass {
+//    required init(x: Int) {
+//        super.init(x: x)
+//    }
+}
+
+
+// 하위 클래스에서 필수생성자를 구현할 때는, 상위 필수생성자를 구현하더라도
+// override(재정의) 키워드가 필요없고, required 키워드만 붙이면 됨
+
+#필수생성자 자동 상속 조건: 다른 지정 생성자 구현 안하면 ➞ 자동 상속
+// (자동상속 조건을 따르기 때문에, 다른 지정 생성자 구현 안하면 자동으로 필수생성자 상속됨)
+
+
+
+
+class Cclass: Aclass {
+    init() {
+        super.init(x: 0)
+    }
+    
+    required init(x: Int) {
+        super.init(x: x)       // 호출시 required init으로 호출하지 않음
+    }
+}
+
+
+// init() 생성자를 구현하면, 자동 상속 조건을 벗어나기 때문에
+// required init(x: Int) 필수생성자 구현해야 함
+
+#필수 생성자 사용 예시 (UIView)
+class AView: UIView {
+//    required init?(coder: NSCoder) {         // 구현을 안해도 자동상속
+//        fatalError("init(coder:) has not been implemented")
+//    }
+}
+
+
+class BView: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 #####################################################################################2021.10.12_4
 지정생성자와 편의생성자의 예외사항
 #클래스의 지정, 편의 생성자 상속의 예외사항
