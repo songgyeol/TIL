@@ -1,4 +1,128 @@
 # TIL
+#####################################################################################2021.10.14_4
+멤버의 확장(서브스크립트), 멤버의 확장(중첩타입)
+4) 멤버의 확장(서브스크립트)
+
+서브스크립트의 확장
+// 확장으로 서브스크립트 추가 가능함
+
+// Int(정수형 타입)에 서브스크립트 추가해보기 (기본자리수의 n자리의 십진수 반환하도록 만들기)
+
+// 예시
+// 123456789[0]    // 9
+// 123456789[1]    // 8
+// 123456789[2]    // 7
+
+
+extension Int {
+    subscript(num: Int) -> Int {
+        
+        var decimalBase = 1
+        
+        for _ in 0..<num {
+            decimalBase *= 10
+        }
+        
+        return (self / decimalBase) % 10
+        
+    }
+}
+
+
+
+123456789[0]      // (123456789 / 1) ==> 123456789 % 10 ==> 나머지 9
+123456789[1]      // (123456789 / 10) ==> 12345678 % 10 ==> 나머지 8
+123456789[2]      // (123456789 / 100) ==> 1234567 % 10 ==> 나머지 7
+123456789[3]      // (123456789 / 1000) ==> 123456 % 10 ==> 나머지 6
+
+
+
+
+// Int값에 요청된 자릿수가 넘어간 경우 0 반환
+
+746381295[9]     // 0
+
+
+// 앞에 0 이 존재 하는 것과 같음
+
+746381295[12]
+
+
+
+멤버의 확장(중첩타입)
+5) 멤버의 확장(중첩타입)
+
+중첩 타입(Nested Types)
+// 클래스, 구조체 및 열거형에 새 중첩 유형을 추가 가능
+
+// Int(정수형 타입)에 종류(Kind) ====> 중첩 열거형 추가해 보기
+
+extension Int {
+    
+    enum Kind {       // 음수인지, 0인지, 양수인지
+        case negative, zero, positive
+    }
+    
+    var kind: Kind {    // 계산 속성으로 구현
+        switch self {
+        case 0:                   // 0인 경우
+            return Kind.zero
+        case let x where x > 0:   // 0보다 큰경우
+            return Kind.positive
+        default:                  // 나머지 (0보다 작은 경우)
+            return Kind.negative
+        }
+    }
+}
+
+
+
+
+let a = 1
+a.kind       // 숫자 1의 (인스턴스) 계산속성을 호출 ====> 해당하는 열거형(Int.Kind타입)을 리턴
+
+let b = 0
+b.kind
+
+let c = -1
+c.kind
+
+
+Int.Kind.positive
+Int.Kind.zero
+Int.Kind.negative
+
+
+let d: Int.Kind = Int.Kind.negative
+
+
+
+
+
+// 위의 확장을 통해서, 어떤 Int값에서도 중첩 열거형이 쓰일 수 있음
+
+// 위의 확장을 활용한 ===> 함수 만들어보기
+
+func printIntegerKinds(_ numbers: [Int]) {
+    for number in numbers {
+        switch number.kind {
+        case .negative:
+            print("- ", terminator: "")
+        case .zero:
+            print("0 ", terminator: "")
+        case .positive:
+            print("+ ", terminator: "")
+        }
+    }
+    print("")
+}
+
+
+
+// 함수 실행해보기
+
+printIntegerKinds([3, 19, -27, 0, -6, 0, 7])      // + + - 0 - 0 +
+
 #####################################################################################2021.10.14_3
 생성자의 확장✔
 3) 멤버의 확장(생성자)
