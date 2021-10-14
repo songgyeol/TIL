@@ -1,4 +1,113 @@
 # TIL
+#####################################################################################2021.10.14_3
+생성자의 확장✔
+3) 멤버의 확장(생성자)
+
+생성자의 확장
+본체의 지정생성자를 호출하는 방식으로만 생성자 구현 가능
+/**=========================================================================
+ - 새로운 (편의)생성자를 확장으로 추가 가능(쉬운 방법으로 인스턴스를 초기화하는 방법을 제공 가능)
+ - 다만, 본체의 지정 생성자를 호출하는 방법으로만 구현 가능
+
+  [클래스]
+ - 편의 생성자만 추가 가능
+ - 지정생성자 추가 불가 / 소멸자 추가 불가 (항상 본래의 클래스에서 정의해야 함)
+
+ 
+  [구조체] ⭐️
+ - 구조체는 (원래) 편의 생성자가 존재하지 않음
+ - (편의 생성자와 비슷한) 생성자를 추가하여 본래의 지정 생성자를 호출하는 방법으로만 구현 가능
+   (즉, 편의생성자와 같은 역할. 그리고 본체의 생성자를 호출 할 때까지 self에 접근이 안됨)
+ 
+ - (본체) 생성자 작성
+ - 기본 생성자/멤버와이즈 생성자 제공 안됨
+ - 확장의 생성자에서 ===> (본래) 지정 생성자 호출해야함
+ 
+ - (예외) (본체) 저장속성에 기본값제공 + 생성자 정의 안한 경우
+ - 기본 생성자/멤버와이즈 생성자가 자동제공
+ - 확장의 생성자에서 ===> 생성자 구현 가능 ⭐️  / 기본 생성자/멤버와이즈 생성자 호출도 가능
+=========================================================================**/
+
+
+구조체 - 생성자 확장의 예시
+// 포인트 구조체, 사이즈 구조체
+
+struct Point {
+    var x = 0.0, y = 0.0
+    
+    //init(x: Double, y: Double)
+    
+    //init()
+}
+
+
+
+struct Size {
+    var width = 0.0, height = 0.0
+}
+
+
+
+// Rect구조체
+
+struct Rect {     // 기본값 제공 ===> 기본 생성자 / 멤버와이즈 생성자가 자동 제공 중
+    var origin = Point()
+    var size = Size()
+}
+
+
+
+let defaultRect = Rect()    // 기본생성자
+
+//Rect(origin: Point(x: <#T##Double#>, y: <#T##Double#>), size: Size(width: <#T##Double#>, height: <#T##Double#>))
+
+let memberwiseRect = Rect(origin: Point(x: 2.0, y: 2.0),
+                          size: Size(width: 5.0, height: 5.0))    // 멤버와이즈 생성자
+
+
+
+
+extension Rect {
+    // 센터값으로 Rect 생성하는 생성자 만들기
+    init(center: Point, size: Size) {
+        let originX = center.x - (size.width / 2)
+        let originY = center.y - (size.height / 2)
+        
+        // 본체의 - 멤버와이즈 생성자 호출 (원칙) ⭐️
+        self.init(origin: Point(x: originX, y: originY), size: size)
+        
+        // 예외적인 경우 (저장속성에 기본값 + 본체에 생성자 구현 안한 경우, 생성자 구현 가능)
+        //self.origin = Point(x: originX, y: originY)
+        //self.size = size
+    }
+}
+
+// 새로 추가한 생성자로 인스턴스 생성해보기
+
+let centerRect = Rect(center: Point(x: 4.0, y: 4.0),
+                      size: Size(width: 3.0, height: 3.0))
+
+
+#클래스 - 생성자 확장의 예시
+// UIColor 기본 생성자
+var color = UIColor(red: 0.3, green: 0.5, blue: 0.4, alpha: 1)
+    
+
+
+extension UIColor {      // 익스텐션 + 편의생성자 조합
+    
+    convenience init(color: CGFloat) {   // Float   / Double
+        self.init(red: color/255, green: color/255, blue: color/255, alpha: 1)
+    }
+
+}
+
+
+// 일단 아주 쉽게 객체 생성하는 방법을 제공 가능해짐
+
+UIColor(color: 1)
+//UIColor(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
+
 #####################################################################################2021.10.14_2
 멤버의 확장(메서드)
 2) 멤버의 확장(메서드)
