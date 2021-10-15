@@ -1,4 +1,102 @@
 # TIL
+#####################################################################################2021.10.15_4
+프로토콜의 상속
+3-2) 기타 프로토콜(Protocols)관련 문법
+프로토콜은 1) 프로토콜 간에 상속이 가능하고 2) 다중 상속이 가능
+
+프로토콜도 상속이 가능 / 다중 상속이 가능 (어짜피 여러가지 요구사항의 나열일뿐)
+protocol Remote {
+    func turnOn()
+    func turnOff()
+}
+
+
+protocol AirConRemote {
+    func Up()
+    func Down()
+}
+
+
+protocol SuperRemoteProtocol: Remote, AirConRemote {   // 프로토콜끼리, 상속 구조를 만드는 것이 가능 ⭐️
+    // func turnOn()
+    // func turnOff()
+    // func Up()
+    // func Down()
+    
+    func doSomething()
+}
+
+
+// 프로토콜의 채택 및 구현
+
+class HomePot: SuperRemoteProtocol {
+    func turnOn() { }
+    
+    func turnOff() { }
+    
+    func Up() { }
+    
+    func Down() { }
+    
+    func doSomething() { }
+}
+
+
+#클래스 전용 프로토콜 (AnyObject)
+// 클래스 전용 프로토콜로 선언
+// (AnyObject프로토콜을 상속)
+
+protocol SomeProtocol: AnyObject {      // AnyObject는 클래스 전용 프로토콜
+    func doSomething()
+}
+
+
+// 구조체에서는 채택할 수 없게 됨 ⭐️
+//struct AStruct: SomeProtocol {
+//
+//}
+
+
+// 클래스에서만 채택 가능
+class AClass: SomeProtocol {
+    func doSomething() {
+        print("Do something")
+    }
+}
+
+#프로토콜 합성(Protocol Composition) 문법
+// 프로토콜을 합성하여 임시타입으로 활용 가능 ⭐️
+
+protocol Named {
+    var name: String { get }
+}
+
+protocol Aged {
+    var age: Int { get }
+}
+
+
+// 하나의 타입에서 여러개의 프로토콜을 채택하는 것 당연히 가능 (다중 상속과 비슷한 역할)
+
+struct Person: Named, Aged {
+    var name: String
+    var age: Int
+}
+
+
+// 프로토콜을 두개를 병합해서 사용 하는 문법(&로 연결)
+func wishHappyBirthday(to celebrator: Named & Aged) {   // 임시적인 타입으로 인식
+    print("생일축하해, \(celebrator.name), 넌 이제 \(celebrator.age)살이 되었구나!")
+}
+
+
+let birthdayPerson = Person(name: "홍길동", age: 20)
+wishHappyBirthday(to: birthdayPerson)
+
+
+
+let whoIsThis: Named & Aged = birthdayPerson      // 임시적인 타입으로 저장 (두개의 프로토콜을 모두 채택한 타입만 저장 가능)
+
 #####################################################################################2021.10.15_3
 타입으로써의 프로토콜✔
 3-1) 타입으로써의 프로토콜(Protocols as Types)
