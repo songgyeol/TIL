@@ -1,4 +1,229 @@
 # TIL
+#####################################################################################2021.10.18_5
+escaping, autoclosures
+@escaping 키워드
+
+함수의 파라미터 중 클로저 타입에 @escaping 키워드가 필요한 경우
+/**==========================================================================
+ - 원칙적으로 함수의 실행이 종료되면 파라미터로 쓰이는 클로저도 제거됨
+ - @escaping 키워드는 클로저를 제거하지 않고 함수에서 탈출시킴(함수가 종료되어도 클로저가 존재하도록 함)
+ - ==> 클로저가 함수의 실행흐름(스택프레임)을 벗어날 수 있도록 함
+ ============================================================================**/
+ 
+ 
+
+// (1) 클로저를 단순 실행 (non-escaping) =====================
+//     (지금까지 다뤘던 내용)
+
+func performEscaping1(closure: () -> ()) {
+    print("프린트 시작")
+    closure()
+}
+
+
+performEscaping1 {
+    print("프린트 중간")
+    print("프린트 종료")
+}
+
+
+
+
+// (2) 클로저를 외부변수에 저장 (@escaping 필요) =================
+
+/**===========================================
+ @escaping 사용의 대표적인 경우
+ - 1) 어떤 함수의 내부에 존재하는 클로저(함수)를 외부 변수에 저장
+ - 2) GCD (비동기 코드의 사용)
+ =============================================**/
+
+
+
+var aSavedFunction: () -> () = { print("출력") }
+
+//aSavedFunction()
+
+
+
+func performEscaping2(closure: @escaping () -> ()) {
+    aSavedFunction = closure         // 클로저를 실행하는 것이 아니라  aSavedFunction 변수에 저장
+    //closure()
+}
+
+
+//aSavedFunction()
+
+
+performEscaping2(closure: { print("다르게 출력") })
+
+
+//aSavedFunction()
+
+
+
+
+// 또다른 예제 (GCD 비동기 코드)
+
+
+func performEscaping1(closure: @escaping (String) -> ()) {
+    
+    var name = "홍길동"
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {   //1초뒤에 실행하도록 만들기
+        closure(name)
+    }
+    
+}
+
+
+
+performEscaping1 { str in
+    print("이름 출력하기: \(str)")
+}
+
+
+
+@autoclosure 키워드
+
+함수의 파라미터 중 클로저 타입에 @autoclosure 키워드를 붙이는 이유
+// 클로저 앞에 @autoclosure 키워드 사용(파라미터가 없는 클로저만 가능)
+
+func someFuction(closure: @autoclosure () -> Bool) {
+    if closure() {
+        print("참입니다.")
+    } else {
+        print("거짓입니다.")
+    }
+}
+
+
+var num = 1
+
+
+// 실제로 함수를 사용하려고 하면
+
+
+//someFuction(closure: <#T##Bool#>)
+
+someFuction(closure: num == 1)
+
+
+/**========================================================================
+ - 일반적으로 클로저 형태로 써도되지만, 너무 번거로울때 사용
+ - 번거로움을 해결해주지만, 실제 코드가 명확해 보이지 않을 수 있으므로 사용 지양(애플 공식 문서)
+ - 잘 사용하지 않음. 읽기위한 문법
+==========================================================================**/
+
+
+
+// autoclosure는 기본적으로 non-ecaping 특성을 가지고 있음
+
+func someAutoClosure(closure: @autoclosure @escaping () -> String) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        print("소개합니다: \(closure())")
+    }
+}
+
+
+someAutoClosure(closure: "제니")
+#####################################################################################2021.10.18_4
+Closures 메모리 구조
+클로저의 캡처
+
+클로저의 Capuring Value
+var stored = 0
+
+
+let closure = { (number: Int) -> Int in
+    stored += number
+    return stored
+}
+
+
+
+
+closure(3)
+
+closure(4)   // 어떤 결과가 나올까?
+
+closure(5)
+
+stored = 0
+
+closure(5)   // 어떤 결과가 나올까?
+
+
+
+#캡처 현상
+일반적인 함수
+// 함수 내에서 함수를 실행하고, 값을 리턴하는 일반적인 함수
+
+func calculate(number: Int) -> Int {
+    
+    var sum = 0
+    
+    func square(num: Int) -> Int {
+        sum += (num * num)
+        return sum
+    }
+    
+    let result = square(num: number)
+    
+    return result
+}
+
+
+calculate(number: 10)
+calculate(number: 20)
+calculate(number: 30)
+
+#변수를 캡처하는 함수(중첩 함수의 내부 함수) - 캡처 현상의 발생
+/**=======================================================
+ - 아래와 같은 경우, 중첩함수로 이루어져 있고
+ - 내부 함수 외부에 계속 사용해야하는 값이 있기 때문에 캡처 현상이 발생
+ 
+ - (함수/클로저를 변수에 저장하는 시점에 캡처) ==> 클로저도 레퍼런스 타입
+=========================================================**/
+
+
+func calculateFunc() -> ((Int) -> Int) {
+    
+    var sum = 0
+    
+    func square(num: Int) -> Int {
+        sum += (num * num)
+        return sum
+    }
+    
+    return square
+}
+
+
+
+
+// 변수에 저장하는 경우(Heap 메모리에 유지)
+var squareFunc = calculateFunc()
+
+
+squareFunc(10)
+squareFunc(20)
+squareFunc(30)
+
+
+
+// 변수에 저장하지 않는 경우
+// (Heap메모리에 유지하지 않음)
+
+//calculateFunc()(10)
+//calculateFunc()(20)
+//calculateFunc()(30)
+
+
+
+// 레퍼런스 타입
+var dodoFunc = squareFunc
+dodoFunc(20)
+
 #####################################################################################2021.10.18_3
 Closures 문법 최적화,실제 사용 예시✔
 클로저의 문법 최적화
