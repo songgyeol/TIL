@@ -1,4 +1,88 @@
 # TIL
+#####################################################################################2021.10.23_4
+GCD사용시 주의사항_2
+클로저의 강한 참조 주의
+
+강한참조의 경우 주의해서 사용해야함
+
+강한 참조
+// 강한 참조가 일어나고, (서로가 서로를 가르키는) 강한 참조 사이클은 일어나지 않지만
+// 생각해볼 부분이 있음
+
+
+class ViewController: UIViewController {
+    
+    var name: String = "뷰컨"
+    
+    func doSomething() {
+        DispatchQueue.global().async {
+            sleep(3)
+            print("글로벌큐에서 출력하기: \(self.name)")
+        }
+    }
+    
+    deinit {
+        print("\(name) 메모리 해제")
+    }
+}
+
+
+func localScopeFunction() {
+    let vc = ViewController()
+    vc.doSomething()
+}
+
+
+//localScopeFunction()
+
+//글로벌큐에서 출력하기: 뷰컨
+//뷰컨 메모리 해제
+/**=======================================================
+ - (글로벌큐)클로저가 강하게 캡처하기 때문에, 뷰컨트롤러의 RC가 유지되어
+ - 뷰컨트롤러가 해제되었음에도, 3초뒤에 출력하고 난 후 해제됨
+ - (강한 순환 참조가 일어나진 않지만, 뷰컨트롤러가 필요없음에도 오래 머무름)
+
+ - 그리고 뷰컨트롤러가 사라졌음에도, 출력하는 일을 계속함
+=========================================================**/
+
+
+약한 참조 - 클로저 부분에서 학습했던 내용
+class ViewController1: UIViewController {
+    
+    var name: String = "뷰컨"
+    
+    func doSomething() {
+        // 강한 참조 사이클이 일어나지 않지만, 굳이 뷰컨트롤러를 길게 잡아둘 필요가 없다면
+        // weak self로 선언
+        DispatchQueue.global().async { [weak self] in
+            guard let weakSelf = self else { return }
+            sleep(3)
+            print("글로벌큐에서 출력하기: \(weakSelf.name)")
+        }
+    }
+    
+    deinit {
+        print("\(name) 메모리 해제")
+    }
+}
+
+
+func localScopeFunction1() {
+    let vc = ViewController1()
+    vc.doSomething()
+}
+
+
+localScopeFunction1()
+
+//뷰컨 메모리 해제
+//글로벌큐에서 출력하기: nil
+/**=======================================================
+ - 뷰컨트롤러를 오래동안 잡아두지 않음
+ - 뷰컨트롤러가 사라지면 ===> 출력하는 일을 계속하지 않도록 할 수 있음
+   (if let 바인딩 또는 guard let 바인딩까지 더해서 return 가능하도록)
+=========================================================**/
+
 #####################################################################################2021.10.23_3
 GDC사용시 주의사항
 플레이그라운드 vs 실제 앱 (주의)
