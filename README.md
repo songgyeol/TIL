@@ -1,4 +1,134 @@
 # TIL
+#####################################################################################2021.10.23
+직렬과 동시의 개념
+import Foundation
+import PlaygroundSupport
+PlaygroundPage.current.needsIndefiniteExecution = true
+
+큐로 보내면 다른 쓰레드로 배치
+
+다른 쓰레드로 보낼 수있는 기본 코드 살펴보기
+// "디폴트 글로벌큐 생성","비동기적으로"
+DispatchQueue.global().async {
+    
+    //다른 쓰레드로 보낼 작업을 배치
+    
+}
+
+
+#클로저는 작업을 하나로 묶음
+// 전체가 하나의 작업 ===> 내부적으로는 동기적으로 동작 ⭐️
+DispatchQueue.global().async {
+    print("Task1 시작")
+    print("Task1-1")
+    print("Task1-2")
+    print("Task1-3")
+    print("Task1 종료")
+}
+
+
+
+
+// 위의 코드랑 아래의 코드는 전혀다름... 순서를 보장할 수 없음
+// 아래의 코드는 작업이 5개로 분할된 개념
+
+DispatchQueue.global().async {
+    print("Task2 시작")
+}
+
+
+DispatchQueue.global().async {
+    print("Task2-1")
+}
+
+DispatchQueue.global().async {
+    print("Task2-2")
+}
+
+DispatchQueue.global().async {
+    print("Task2-3")
+}
+
+DispatchQueue.global().async {
+    print("Task2 종료")
+}
+
+sleep(2)
+
+PlaygroundPage.current.finishExecution()
+
+
+
+Async Sync
+// 동기적인 함수의 정의
+
+func task1() {
+    print("Task 1 시작")
+    sleep(2)
+    print("Task 1 완료★")
+}
+
+func task2() {
+    print("Task 2 시작")
+    sleep(2)
+    print("Task 2 완료★")
+}
+
+func task3() {
+    print("Task 3 시작")
+    sleep(2)
+    print("Task 3 완료★")
+}
+
+
+// 비동기적인 함수의 정의
+
+func task4() {
+    DispatchQueue.global().async {
+        print("Task 4 시작")
+        sleep(2)
+        print("Task 4 완료★")
+    }
+}
+
+func task5() {
+    DispatchQueue.global().async {
+        print("Task 5 시작")
+        sleep(2)
+        print("Task 5 완료★")
+    }
+}
+
+func task6() {
+    DispatchQueue.global().async {
+        print("Task 6 시작")
+        sleep(2)
+        print("Task 6 완료★")
+    }
+}
+
+
+#코드레벨에서의 동기(sync) VS 비동기(async)
+동기적인 작업의 진행
+task1()   // 일이 끝나야 다음줄로 이동 (내부 동기)
+task2()   // 일이 끝나야 다음줄로 이동 (내부 동기)
+task3()   // 일이 끝나야 다음줄로 이동 (내부 동기)
+
+
+비동기적인 작업의 진행
+// 내부적으로 비동기처리가 되어있는 함수들
+
+
+task4()   // 일이 끝나지 않아도 다음줄로 이동 (내부 비동기)
+task5()   // 일이 끝나지 않아도 다음줄로 이동 (내부 비동기)
+task6()   // 일이 끝나지 않아도 다음줄로 이동 (내부 비동기)
+
+
+sleep(4)
+PlaygroundPage.current.finishExecution()
+
+
+
 #####################################################################################2021.10.22
 비동기프로그래밍에 대한 이해
 import Foundation
