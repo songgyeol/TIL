@@ -1,4 +1,136 @@
 # TIL
+#####################################################################################2021.10.23_3
+GDC사용시 주의사항
+플레이그라운드 vs 실제 앱 (주의)
+
+실제 앱에서는 UI관련작업들이 DispatchQueue.main(메인큐)에서 동작하지만, 플레이 그라운드에서는 DispatchQueue.global()(글로벌 디폴트큐)에서 동작한다. 따라서 플레이그라운드에서는 메인큐에 일을 시키면 안된다.
+// DispatchQueue.main ====> 앱에서는 UI를 담당
+// DispatchQueue.global() ====> 플레이그라운드에서 프린트영역를 담당
+
+
+
+
+
+#UI업데이트는 메인쓰레드에서
+
+유저인터페이스(즉, 화면)와 관련된 작업은 메인쓰레드에서 진행해야 함
+var imageView: UIImageView? = nil
+
+
+let url = URL(string: "https://bit.ly/32ps0DI")!
+
+
+// URL세션은 내부적으로 비동기로 처리된 함수임.
+URLSession.shared.dataTask(with: url) { (data, response, error) in
+    
+    if error != nil{
+        print("에러있음")
+    }
+    
+    guard let imageData = data else { return }
+    
+    // 즉, 데이터를 가지고 이미지로 변형하는 코드
+    let photoImage = UIImage(data: imageData)
+    
+    // 🎾 이미지 표시는 DispatchQueue.main에서 🎾
+    DispatchQueue.main.async {
+        imageView?.image = photoImage
+    }
+    
+    
+}.resume()
+
+
+#UI와 관련된 일은 다시 메인쓰레드로 보내야 함
+DispatchQueue.global().async {
+    
+    // 비동기적인 작업들 ===> 네트워크 통신 (데이터 다운로드)
+    
+    DispatchQueue.main.async {
+        // UI와 관련된 작업은 
+    }
+}
+
+sleep(4)
+
+PlaygroundPage.current.finishExecution()
+
+
+
+#올바른 비동기함수의 설계
+
+리턴(return)이 아닌 콜백함수를 통해, 끝나는 시점을 알려줘야 한다.
+함수(메서드)를 아래처럼 설계하면 절대 안된다.
+func getImages(with urlString: String) -> UIImage? {
+    
+    let url = URL(string: urlString)!
+    
+    var photoImage: UIImage? = nil
+    
+    URLSession.shared.dataTask(with: url) { (data, response, error) in
+        if error != nil {
+            print("에러있음: \(error!)")
+        }
+        // 옵셔널 바인딩
+        guard let imageData = data else { return }
+        
+        // 데이터를 UIImage 타입으로 변형
+        photoImage = UIImage(data: imageData)
+        
+    }.resume()
+
+    
+    return photoImage    // 항상 nil 이 나옴
+}
+
+
+
+getImages(with: "https://bit.ly/32ps0DI")    // 무조건 nil로 리턴함 ⭐️
+
+
+
+#올바른 함수(메서드)의 설계 - 콜백함수의 사용법
+func properlyGetImages(with urlString: String, completionHandler: @escaping (UIImage?) -> Void) {
+    
+    let url = URL(string: urlString)!
+    
+    var photoImage: UIImage? = nil
+    
+    URLSession.shared.dataTask(with: url) { (data, response, error) in
+        if error != nil {
+            print("에러있음: \(error!)")
+        }
+        // 옵셔널 바인딩
+        guard let imageData = data else { return }
+        
+        // 데이터를 UIImage 타입으로 변형
+        photoImage = UIImage(data: imageData)
+        
+        completionHandler(photoImage)
+        
+    }.resume()
+    
+}
+
+
+
+// 올바르게 설계한 함수 실행
+properlyGetImages(with: "https://bit.ly/32ps0DI") { (image) in
+    
+    // 처리 관련 코드 넣는 곳...
+    
+    DispatchQueue.main.async {
+        // UI관련작업의 처리는 여기서
+    }
+    
+}
+
+
+
+sleep(5)
+
+
+PlaygroundPage.current.finishExecution()
 #####################################################################################2021.10.23_2
 GCD개념 및 종류
 import Foundation
