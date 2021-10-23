@@ -1,4 +1,37 @@
 # TIL
+#####################################################################################2021.10.23_5
+동시성프로그래밍의 메모리구조/ 동시성프로그래밍의 문제점
+동시큐에서 직렬큐로 보내기
+
+Thread-safe하지 않을때, 처리하는 방법
+// 배열은 여러쓰레드에서 동시에 접근하면 문제가 생길 수 있다.
+
+
+var array = [String]()
+
+let serialQueue = DispatchQueue(label: "serial")
+
+
+for i in 1...20 {
+    DispatchQueue.global().async {
+        print("\(i)")
+        //array.append("\(i)")    //  <===== 동시큐에서 실행하면 동시다발적으로 배열의 메모리에 접근
+        
+        serialQueue.async {        // 올바른 처리 ⭐️
+            array.append("\(i)")
+        }
+    }
+}
+
+
+
+
+// 5초후에 배열 확인하고 싶은 코드 일뿐...
+
+DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+    print(array)
+    //PlaygroundPage.current.finishExecution()
+}
 #####################################################################################2021.10.23_4
 GCD사용시 주의사항_2
 클로저의 강한 참조 주의
