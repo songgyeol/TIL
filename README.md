@@ -1,4 +1,48 @@
 # TIL
+#####################################################################################2021.10.23_1
+직렬(Serial)큐 VS 동시큐(Concurrent)
+Serial 직렬큐
+let serialQueue = DispatchQueue(label: "com.inflearn.serial")
+
+
+
+serialQueue.async {
+    task1()
+}
+
+serialQueue.async {
+    task2()
+}
+
+serialQueue.async {
+    task3()
+}
+
+
+// 비동기적으로 보내더라도, 순서대로 출력
+
+
+Concurrent 동시큐
+let concurrentQueue = DispatchQueue.global()
+
+
+concurrentQueue.async {
+    task1()
+}
+
+concurrentQueue.async {
+    task2()
+}
+
+concurrentQueue.async {
+    task3()
+}
+
+
+
+sleep(5)
+PlaygroundPage.current.finishExecution()
+
 #####################################################################################2021.10.23
 직렬과 동시의 개념
 import Foundation
