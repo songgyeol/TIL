@@ -1,4 +1,69 @@
 # TIL
+#####################################################################################2021.10.25_2
+Generics_3
+프로토콜에서의 제네릭 문법의 사용
+
+프로토콜에서 제네릭의 사용 - Associated Types(연관 타입)
+/**================================================
+ - 프로토콜을 제네릭 방식으로 선언하려면 어떻게 해야할까?
+ - 연관타입(Assiciated Types)으로 선언해야함 ⭐️
+
+ - 프로토콜은 타입들이 채택할 수 있는 한차원 높은 단계에서
+   요구사항만을 선언(자격증)하는 개념이기 때문에
+   제네릭 타입과 조금 다른 개념(연관타입)을 추가적으로 도입한 것 뿐
+ 
+ [프로토콜 방식]
+ - <T> ===> associatedtype T
+ =================================================**/
+
+
+protocol RemoteControl {           // <T>의 방식이 아님
+    associatedtype T               // 연관형식은 대문자로 시작해야함(UpperCamelcase)
+    func changeChannel(to: T)      // 관습적으로 Element를 많이 사용
+    func alert() -> T?
+}
+
+
+
+// 연관형식이 선언된 프로토콜을 채용한 타입은, typealias로 실제 형식을 표시해야함
+
+struct TV: RemoteControl {
+    
+    typealias T = Int       // 생략 가능
+    
+    func changeChannel(to: Int) {
+        print("TV 채널바꿈: \(to)")
+    }
+    
+    func alert() -> Int? {
+        return 1
+    }
+
+}
+
+
+
+class Aircon: RemoteControl {
+
+    // 연관형식이 추론됨
+    
+    func changeChannel(to: String) {
+        print("Aircon 온도바꿈: \(to)")
+    }
+
+    func alert() -> String? {
+        return "1"
+    }
+
+}
+
+#연관 형식에 제약을 추가한다면
+protocol RemoteControl2 {
+    associatedtype Element: Equatable     // <T: Equatable> 제약조건 추가
+    func changeChannel(to: Element)
+    func alert() -> Element?
+}
+
 #####################################################################################2021.10.25_1
 Generics_2
 제네릭 타입의 정의
