@@ -1,4 +1,42 @@
 # TIL
+#####################################################################################2021.10.27_6
+상속과 확장의 접근
+상속과 확장의 접근 제어
+
+상속 관계(Subclassing)의 접근 제어
+/**===========================================================================
+- 1)타입 관련: 상속해서 만든 서브클래스는 상위클래스보다 더 높은 접근 수준을 가질 수는 없음
+- 2)멤버 관련: 동일 모듈에서 정의한 클래스의 상위 멤버에 접근가능하면, (접근 수준 올려서) 재정의(override)도 가능
+ =============================================================================**/
+
+public class A {
+    fileprivate func someMethod() {}
+}
+
+
+// public이하의 접근 수준만 가능(public/internal/fileprivate)
+internal class B: A {
+    override internal func someMethod() {   // 접근 수준 올려서 재정의 가능 ⭐️
+        super.someMethod()                  // (더 낮아도) 모듈에서 접근가능하기 때문에 호출가능
+    }
+}
+
+
+
+#확장(Extension)의 접근 제어
+// 기본법칙 - 원래 본체와 동일한 접근 수준을 유지하고, 본체의 멤버에는 기본적인 접근 가능
+
+public class SomeClass {
+    private var somePrivateProperty = "somePrivate"
+}
+
+
+extension SomeClass {   // public으로 선언한 것과 같음
+    func somePrivateControlFunction() {
+        somePrivateProperty = "접근가능"
+    }
+}
+
 #####################################################################################2021.10.27_5
 Custom Type AccessControl
 커스텀 타입의 접근 제어
