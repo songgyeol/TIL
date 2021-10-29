@@ -1,4 +1,50 @@
 # TIL
+#####################################################################################2021.10.29
+문자열 (일부)포함여부 및 앞/뒤 글자의 반환
+문자열에서 일치여부 확인하기
+
+let string = "Hello, world!"
+
+
+
+// 전체문자열에서 포함여부
+
+string.contains("Hello")
+string.lowercased().contains("hello")
+string.contains("world")
+
+
+// 접두어/접미어 포함여부
+
+string.hasPrefix("Hello")
+string.hasPrefix("world")
+string.lowercased().hasPrefix("world")
+
+string.hasSuffix("!")
+string.hasSuffix("world!")
+
+
+
+
+
+// 접두어/접미어 반환 (앞에서 또는 뒤에서 몇글자 뽑아내기)
+
+string.prefix(2)
+string.suffix(3)
+
+
+// 공통 접두어 반환
+
+string.commonPrefix(with: "Hello, swift")
+string.commonPrefix(with: "hello", options: [.caseInsensitive])
+
+
+
+// 앞/뒤를 drop시킨 나머지 반환
+
+string.dropFirst(3)
+string.dropLast(3)
+
 #####################################################################################2021.10.28_8
 문자열 비교하기
 
