@@ -1,4 +1,88 @@
 # TIL
+#####################################################################################2021.12.16
+Alert#1😎
+class AlertViewController: UIViewController {
+    
+    @IBAction func show(_ sender: Any) {
+        let controller = UIAlertController(title: "Hello", message: "Have a nice day", preferredStyle: .alert)
+     //얼러트에는 반드시 액션이 들어가야 함
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            print(action.title)                 //style메세지에는 .누르면 확인가능 3개(cancel:닫기, destructive:빨간색(주의), default: 기본)
+        }
+        controller.addAction(okAction)
+        
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            print(action.title)
+        }
+        controller.addAction(cancelAction)
+        
+        let destructiveAction = UIAlertAction(title: "Destructive", style: .destructive) { (action) in
+            print(action.title)
+        }
+        controller.addAction(destructiveAction)
+        
+        controller.preferredAction = okAction
+        //prefeerd는 present 전에 지정해줘야 한다, alert에서만 사용.
+            present(controller, animated: true, completion: nil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+}
+
+#2😎
+//[경고창에 텍스트 필드 추가]
+class AddTextFieldViewController: UIViewController {
+    
+    @IBOutlet weak var idLabel: UILabel!
+    @IBOutlet weak var passwordLabel: UILabel!
+    
+    @IBAction func show(_ sender: Any) {
+        let controller = UIAlertController(title: "Sign Un to iTunes Store", message: nil, preferredStyle: .alert)
+        
+        controller.addTextField { (idField) in
+            idField.placeholder = "Apple ID"
+        }
+        
+
+        controller.addTextField { (passwordField) in
+            passwordField.placeholder = "Input Password"
+            passwordField.isSecureTextEntry = true   //password는 마스킹
+        }
+        
+        let okAction = UIAlertAction(title: "Ok", style: .default) { [weak self] (action) in
+            if let fieldList = controller.textFields {
+                if let idField = fieldList.first {
+                    self?.idLabel.text = idField.text
+                }
+                
+                if let passwordField = fieldList.last {
+                    self?.passwordLabel.text = passwordField.text
+                }
+            }
+        }
+        controller.addAction(okAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        controller.addAction(cancelAction)
+        
+        present(controller, animated: true, completion: nil)
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+    }
+}
+
+
+
+
 #####################################################################################2021.11.12
 NavigationView #1 [view vs nvview]
 //viewcontroller와 navigationview
