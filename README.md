@@ -1,4 +1,137 @@
 # TIL
+#####################################################################################2021.12.18
+Label, Button
+//main view
+import UIKit
+
+class ViewController: UIViewController {
+
+     
+    let redButton = UIButton()
+    let blueButton = UIButton()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //$0 하는 법
+//        [redButton, blueButton].forEach {
+//            $0.setTitle("", for: .normal)
+//        }
+        view.addSubview(redButton)
+        redButton.frame.size = CGSize(width: 60, height: 30)
+        redButton.layer.cornerRadius = 10
+        
+        //redButton.setTitle("", for: .normal)
+        redButton.backgroundColor = UIColor.systemRed
+        redButton.addTarget(self, action: #selector(redBtTapped(_:)), for: .touchUpInside)
+
+        view.addSubview(blueButton)
+        blueButton.frame.size = CGSize(width: 60, height: 30)
+        blueButton.layer.cornerRadius = 10
+        //blueButton.setTitle("", for: .normal)
+        blueButton.backgroundColor = UIColor.systemBlue
+        blueButton.addTarget(self, action: #selector(blueBtTapped(_:)), for: .touchUpInside)
+        
+        //[뷰를 유연하게 표현] 생성된 제약을 적용 isActive = true
+        redButton.translatesAutoresizingMaskIntoConstraints = false
+        blueButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        //아이폰 m자 탈모라인 안쪽으로
+        let safeArea = view.safeAreaLayoutGuide
+        //중심
+        redButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        blueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        //상단에서부터
+        redButton.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 300).isActive = true
+        blueButton.topAnchor.constraint(equalTo: redButton.topAnchor, constant: 200).isActive = true
+        
+    
+    }
+
+    @objc func redBtTapped(_ button: UIButton) {
+        //코드로 뷰 연결하는 법
+        let redVC = FIrstViewController()
+        redVC.modalPresentationStyle = .fullScreen
+        self.present(redVC, animated: true)
+        
+        
+    }
+    //스토리보드 뷰 이미지 연결하는 법
+//        guard let redViewVC = storyboard?.instantiateViewController(identifier: "redView") else { return }
+//        redViewVC.modalPresentationStyle = .fullScreen
+//        self.present(redViewVC, animated: true, completion: nil)
+//    }
+    
+    
+    @objc func blueBtTapped(_ button: UIButton) {
+     //코드로 뷰 연결하는 법
+        let blueVC = SecondViewController()
+        blueVC.modalPresentationStyle = .fullScreen
+        self.present(blueVC, animated: true)
+        
+        
+    }
+        //스토리보드 뷰 이미지 연결하는 법
+//        guard let blueViewVC = storyboard?.instantiateViewController(identifier: "blueView") else { return }
+//        blueViewVC.modalPresentationStyle = .fullScreen
+//        self.present(blueViewVC, animated: true, completion: nil)
+//    }
+}
+
+
+
+
+//sub view
+import UIKit
+
+class FIrstViewController: UIViewController {
+
+    
+    let redBackBt = UIButton()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = UIColor.systemRed
+        view.layer.cornerRadius = 10
+        view.addSubview(redBackBt)
+        
+        redBackBt.setTitle("뒤로", for: .normal)
+        redBackBt.setTitleColor(.black, for: .normal)
+        redBackBt.backgroundColor = UIColor.white
+        redBackBt.addTarget(self, action: #selector(whiteBackTapped), for: .touchUpInside)
+        redBackBt.translatesAutoresizingMaskIntoConstraints = false
+        redBackBt.layer.cornerRadius = 10
+        
+        
+        let safeArea = view.safeAreaLayoutGuide
+        
+                
+        redBackBt.centerXAnchor.constraint(equalTo: safeArea.centerXAnchor).isActive = true
+        redBackBt.centerYAnchor.constraint(equalTo: safeArea.centerYAnchor).isActive = true
+        redBackBt.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 150).isActive = true
+        redBackBt.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: -150).isActive = true
+        // Do any additional setup after loading the view.
+    }
+    
+
+    @objc func whiteBackTapped(_ button: UIButton) {
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
+
 #####################################################################################2021.12.17
 날짜와 시간다루기
 실제 프로젝트에서 활용 방식
