@@ -1,4 +1,10 @@
 # TIL
+#####################################################################################2021.12.24
+국내IT기업목록
+[https://techcompanies.kr](https://techcompanies.kr/)
+
+[https://docs.google.com/spreadsheets/d/1U28rQ6j0_byb1Tola_ZB8xsDsV1MlH1M66Sex6Qk3oM/edit#gid=0](https://docs.google.com/spreadsheets/d/1U28rQ6j0_byb1Tola_ZB8xsDsV1MlH1M66Sex6Qk3oM/edit#gid=0)
+
 #####################################################################################2021.12.23
 무료 웹디자인툴 5가지
 https://www.youtube.com/watch?v=0Pwxh1XL-Fk
