@@ -1,4 +1,46 @@
 # TIL
+#####################################################################################2021.12.26
+스위치문으로 화면 넘기기
+extension TabOneViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return user.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.cellId, for: indexPath) as! CustomCell
+        
+        cell.mainMenu.image = user[indexPath.row].mainMenu
+        // cell.name.text = user[indexPath.row].name
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row{
+        case 0:
+            let nextVC = SuperSeedViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        case 1:
+            let nextVC = PremiumViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        case 2:
+            let nextVC = ClasicViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        case 3:
+            let nextVC = SideDishViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        case 4:
+            let nextVC = DrinkViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+        case 5:
+            let nextVC = SauceViewController()
+            self.navigationController?.pushViewController(nextVC, animated: true)
+
+        default:
+            break
+        }
+    }
 #####################################################################################2021.12.24
 국내IT기업목록
 [https://techcompanies.kr](https://techcompanies.kr/)
