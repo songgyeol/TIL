@@ -1,4 +1,54 @@
 # TIL
+#####################################################################################2022.01.19
+Weather.Temperature#1
+import UIKit
+
+class ViewController: UIViewController {
+    
+    let mainLabel = UILabel()
+    let mainButton = UIButton()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUI()
+        mainLabel.text = "aaa"
+        mainLabel.layer.cornerRadius = 5
+        
+    }
+    
+    func setUI() {
+        setBasic()
+        setLayout()
+
+    }
+    
+    func setBasic() {
+        [mainLabel, mainButton].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    func setLayout() {
+        NSLayoutConstraint.activate([
+            
+            mainLabel.topAnchor.constraint(equalTo: view.topAnchor),
+            mainLabel.leftAnchor.constraint(equalTo: view.leftAnchor),
+            mainLabel.rightAnchor.constraint(equalTo: view.rightAnchor),
+            mainLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            //mainLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            mainLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            mainLabel.widthAnchor.constraint(equalToConstant: 120),
+            mainLabel.heightAnchor.constraint(equalToConstant: 40)
+        ])
+    }
+    
+}
+
+
+
+
 #####################################################################################2021.12.26
 스위치문으로 화면 넘기기
 extension TabOneViewController: UITableViewDelegate, UITableViewDataSource {
