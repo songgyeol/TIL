@@ -1,4 +1,79 @@
 # TIL
+#####################################################################################2022.01.21
+        //                //모서리 굴곡률
+        //                btn.layer.cornerRadius = 10
+        //                //테두리 굵기
+        //                btn.layer.borderWidth = 2
+        //                //테두리 색상
+        //                btn.layer.borderColor = UIColor.red.cgColor
+
+import UIKit
+
+class ViewController: UIViewController {
+    
+    let mainLabel = UILabel()
+    let subLabel = UILabel()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setUI()
+    }
+    
+    func setUI() {
+        
+    }
+    
+    func setBasic() {
+        //                //모서리 굴곡률
+        //                btn.layer.cornerRadius = 10
+        //                //테두리 굵기
+        //                btn.layer.borderWidth = 2
+        //                //테두리 색상
+        //                btn.layer.borderColor = UIColor.red.cgColor
+        [mainLabel, subLabel].forEach {[
+            view.addSubview($0),
+            $0.translatesAutoresizingMaskIntoConstraints = false,
+            $0.layer.cornerRadius = 4,
+            $0.layer.borderWidth = 2,
+            $0.layer.borderColor = UIColor.black.cgColor
+        ]}
+        mainLabel.text = "dddd"
+        mainLabel.font = .systemFont(ofSize: 10)
+        mainLabel.textAlignment = .center
+        mainLabel.textColor = .black
+        mainLabel.backgroundColor = .red
+        
+    }
+    
+    func setLayout() {
+        NSLayoutConstraint.activate([
+            mainLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+            mainLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            mainLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            mainLabel.heightAnchor.constraint(equalToConstant: 200),
+            
+            subLabel.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 40),
+            subLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            subLabel.heightAnchor.constraint(equalToConstant: 38),
+            subLabel.widthAnchor.constraint(equalToConstant: 140)
+            //
+            //            subtractButton.topAnchor.constraint(equalTo: quantityLabel.topAnchor),
+            //            subtractButton.trailingAnchor.constraint(equalTo: quantityLabel.leadingAnchor),
+            //            subtractButton.bottomAnchor.constraint(equalTo: quantityLabel.bottomAnchor),
+            //            subtractButton.widthAnchor.constraint(equalToConstant: 20),
+            //
+            //            addButton.topAnchor.constraint(equalTo: quantityLabel.topAnchor),
+            //            addButton.leadingAnchor.constraint(equalTo: quantityLabel.trailingAnchor),
+            //            addButton.bottomAnchor.constraint(equalTo: quantityLabel.bottomAnchor),
+            //            addButton.widthAnchor.constraint(equalToConstant: 20),
+            
+        ])
+    }
+    
+}
+
 #####################################################################################2022.01.19
 Weather.Temperature#1
 import UIKit
