@@ -1,4 +1,129 @@
 # TIL
+#####################################################################################2022.01.22
+Label Layout Test
+
+import UIKit
+
+class ViewController: UIViewController {
+    
+    let redLabel = UILabel()
+    let orangeLabel = UILabel()
+    let yellowLabel = UILabel()
+    let greenLabel = UILabel()
+    let blueLabel = UILabel()
+    let manLabel = UILabel()
+    let purpleLabel = UILabel()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUI()
+    }
+    
+    func setUI() {
+        
+        setBasic()
+        setLayout()
+        
+    }
+    
+    func setBasic() {
+        
+        //let safeArea = view.safeAreaLayoutGuide
+        //                //모서리 굴곡률
+        //                btn.layer.cornerRadius = 10
+        //                //테두리 굵기
+        //                btn.layer.borderWidth = 2
+        //                //테두리 색상
+        //                btn.layer.borderColor = UIColor.red.cgColor
+        [redLabel, blueLabel, orangeLabel, yellowLabel, greenLabel, blueLabel, manLabel, purpleLabel].forEach {[
+            view.addSubview($0),
+            $0.translatesAutoresizingMaskIntoConstraints = false,
+            $0.layer.cornerRadius = 5,
+            $0.layer.borderWidth = 2,
+            $0.layer.borderColor = UIColor.black.cgColor,
+        ]}
+        redLabel.text = "외않되?"
+        //redLabel.font = .systemFont(ofSize: 10)
+        redLabel.textAlignment = .center
+        //redLabel.textColor = .black
+        
+        orangeLabel.text = "왜절해?"
+        orangeLabel.textAlignment = .center
+        
+        yellowLabel.text = "스냅킷?"
+        yellowLabel.textAlignment = .center
+        
+        greenLabel.text = "코코아팟?"
+        greenLabel.textAlignment = .center
+        
+        blueLabel.text = "스코프?"
+        blueLabel.textAlignment = .center
+        
+        manLabel.text = "도미노?"
+        manLabel.textAlignment = .center
+        
+        manLabel.text = "API?"
+        manLabel.textAlignment = .center
+        
+        purpleLabel.text = "Decodable?"
+        purpleLabel.textAlignment = .center
+        
+        redLabel.backgroundColor = .red
+        orangeLabel.backgroundColor = .orange
+        yellowLabel.backgroundColor = .yellow
+        greenLabel.backgroundColor = .green
+        blueLabel.backgroundColor = .blue
+        manLabel.backgroundColor = UIColor.systemCyan
+        purpleLabel.backgroundColor = .purple
+        
+        
+    }
+    
+    func setLayout() {
+        NSLayoutConstraint.activate([
+            redLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            redLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            redLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -200),
+            redLabel.heightAnchor.constraint(equalToConstant: 30),
+            
+            orangeLabel.topAnchor.constraint(equalTo: redLabel.bottomAnchor, constant: 0),
+            orangeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            orangeLabel.heightAnchor.constraint(equalToConstant: 30),
+            orangeLabel.widthAnchor.constraint(equalToConstant: 200),
+            
+            yellowLabel.topAnchor.constraint(equalTo: orangeLabel.bottomAnchor, constant: 0),
+            yellowLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 200),
+            yellowLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            yellowLabel.heightAnchor.constraint(equalToConstant: 30),
+            
+            greenLabel.topAnchor.constraint(equalTo: yellowLabel.bottomAnchor, constant: 0),
+            greenLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            greenLabel.heightAnchor.constraint(equalToConstant: 30),
+            greenLabel.widthAnchor.constraint(equalToConstant: 200),
+            
+            blueLabel.topAnchor.constraint(equalTo: greenLabel.bottomAnchor, constant: 0),
+            blueLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            blueLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -200),
+            blueLabel.heightAnchor.constraint(equalToConstant: 30),
+           
+            manLabel.topAnchor.constraint(equalTo: blueLabel.bottomAnchor, constant: 0),
+            manLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            manLabel.heightAnchor.constraint(equalToConstant: 30),
+            manLabel.widthAnchor.constraint(equalToConstant: 200),
+            
+            purpleLabel.topAnchor.constraint(equalTo: manLabel.bottomAnchor, constant: 0),
+            purpleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 200),
+            purpleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            purpleLabel.heightAnchor.constraint(equalToConstant: 30)
+        ])
+    }
+    
+}
+
+
+
+
 #####################################################################################2022.01.21
         //                //모서리 굴곡률
         //                btn.layer.cornerRadius = 10
