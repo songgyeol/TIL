@@ -1,4 +1,14 @@
 # TIL
+#####################################################################################2022.02.04
+링크모음
+TableView Cell UiButton 연결 - [https://leechamin.tistory.com/500](https://leechamin.tistory.com/500)
+
+Navigation 화면전환하기 - [https://0urtrees.tistory.com/43](https://0urtrees.tistory.com/43)
+
+UinNavigationController에 대해 - [UINavigationController 에 대해](https://tong94.tistory.com/26?category=1065924)
+
+Design Pattern [https://refactoring.guru/refactoring/what-is-refactoring](https://refactoring.guru/refactoring/what-is-refactoring)
+
 #####################################################################################2022.02.03
 앱 만들기 TIP
 검색
