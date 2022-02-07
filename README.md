@@ -1,4 +1,73 @@
 # TIL
+#####################################################################################2022.02.07
+extension위치
+### `extension`으로 보통 클래스를 확장하여 오토레이아웃 등을 잡는데, 이벤트 메서드 등의 위치는 기본 레이아웃 전이 나은지 후가 나은지?
+- 나중에 코드 짜는 게 익숙해지면 레이아웃은 한 번 짠 후로는 잘 보지 않기 때문에 맨 밑으로 내려두고 더 자주 보게 되는 코드들을 위에 두는 게 좋다
+
+Core Location
+### `MapView`와 `Core Location`의 차이가 뭔지?
+- `MapView`는 말 그대로 지도 그 자체
+- `Core Location`은 유저의 위치와 관련됨
+- 예를 들어 지도에서 신림역을 찾는다면, `MapView`만 있으면 되지만, 내위치에서 신림역을 찾을 때는 `Core Location`을 함께 사용
+
+delegate (protocol)
+### Delegate를 생성하는 뷰
+
+- 텍스트필드 값 입력받는 뷰컨 (여기서는 `secondViewController.swift`)
+1. **Protocol** 을 생성하고, 요구사항을 **method** 로 생성
+
+```swift
+protocol CustomTextFieldDelegate: class {
+    func textDidInput(didInput text: String)
+}
+```
+
+1. Protocol 을 Type 으로 갖는 **Delegate** 인스턴스 생성
+
+```swift
+weak var delegate: CustomTextFieldDelegate?
+```
+
+1. 생성한 method 가 **동작해야하는 상황**에 코드 작성
+- 버튼을 누르면 텍스트필드에 입력된 값이 text라는 상수에 할당
+- 할당된 text상수를 delegate 변수의 파라미터로 넣기
+- 두번째 뷰 닫기
+
+```swift
+@objc private func handleButton(_ sender: UIButton) {
+        let text = textField.text ?? ""
+        self.delegate?.textDidInput(didInput: text)
+        self.dismiss(animated: true, completion: nil)
+    }
+}
+```
+
+---
+
+### **Delegate 를 위임받는 뷰**
+
+- 여기서는 `FirstViewController.swift`
+1. ViewController 에 **Delegate Protocol** 채택 & Protocol **필수 method** 구현
+
+```swift
+extension FirstViewController: CustomTextFieldDelegate {
+    func textDidInput(didInput text: String) { // 프로토콜의 요구사항(필수 메서드)
+        label.text = text
+    }
+}
+```
+
+1. Delegate 위임
+
+```swift
+@objc private func handleButton(_ sender: UIButton) {
+    let nextVC = SecondViewController()
+    nextVC.delegate = self
+    self.present(nextVC, animated: true, completion: nil)
+}
+```
+
+
 #####################################################################################2022.02.04
 링크모음
 TableView Cell UiButton 연결 - [https://leechamin.tistory.com/500](https://leechamin.tistory.com/500)
