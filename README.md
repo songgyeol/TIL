@@ -1,4 +1,29 @@
 # TIL
+#####################################################################################2022.02.09
+View에게 터치이벤트 주기
+- button, stepper 등과 다르게 label, view, imageView 등은 터치 이벤트를 못 받음
+- 그럴 때 `UIGestureRecognizer`를 이용해주면 됨
+
+- 터치 이벤트 못 받는 이미지뷰 선언
+
+```swift
+let myImgView = UIImageView()
+```
+
+- `UIGestureRecognizer` 객체 찍어낸 후, 이벤트 부여
+
+```swift
+func setGesture() {
+        let gestureRecognizer = UIGestureRecognizer()
+        myImgView.isUserInteractionEnabled = true
+        myImgView.addGestureRecognizer(gestureRecognizer)
+        gestureRecognizer.addTarget(self, action: #selector(imgTappe(_:)))
+    }
+```
+
+- `UIGestureRecognizer` 말고도 여러가지 recognizer가 있으니, 원하는 것 사용하면 됨
+
+
 #####################################################################################2022.02.08
 이를 해결하려면 ImageLoader 인스턴스를 생성한 후
 인스턴스를 사용하는 클래스/구조체 변수에 인스턴스에 대한 참조를 유지하고
