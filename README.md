@@ -1,5 +1,50 @@
 # TIL
 #####################################################################################2022.02.13
+import UIKit
+
+class ViewController: UIViewController {
+    //클로저 실행문(코드가 길때 클로저 실행문으로 하면 가독성 및 바로바로 확인 가능)
+    let emailTextFieldView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.darkGray
+        //코너를 둥글게
+        view.layer.cornerRadius = 5
+        view.layer.masksToBounds = true
+        
+        return view
+        
+    }()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+       
+       makeUI()
+        
+        
+        
+    }
+    
+    func makeUI() {
+      
+        view.addSubview(emailTextFieldView)
+        
+        //오토레이아웃을 수동으로 설정하겠다 = 오토레이아웃을 자동으로 설정하는걸 끄겠다
+        emailTextFieldView.translatesAutoresizingMaskIntoConstraints = false
+        
+        emailTextFieldView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
+        
+        emailTextFieldView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
+        
+        emailTextFieldView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
+        
+        emailTextFieldView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+    }
+
+}
+
+#####################################################################################2022.02.13
 LoginProject_Programmatically
 import UIKit
 
