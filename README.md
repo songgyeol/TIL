@@ -1,4 +1,42 @@
 # TIL
+#####################################################################################2022.02.13
+LoginProject_Programmatically
+import UIKit
+
+class ViewController: UIViewController {
+
+    let emailTextFieldView = UIView()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+       
+       makeUI()
+        
+        
+        
+    }
+    
+    func makeUI() {
+        emailTextFieldView.backgroundColor = UIColor.darkGray
+        
+        view.addSubview(emailTextFieldView)
+        
+        //오토레이아웃을 수동으로 설정하겠다 = 오토레이아웃을 자동으로 설정하는걸 끄겠다
+        emailTextFieldView.translatesAutoresizingMaskIntoConstraints = false
+        
+        emailTextFieldView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30).isActive = true
+        
+        emailTextFieldView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30).isActive = true
+        
+        emailTextFieldView.topAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
+        
+        emailTextFieldView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+    }
+
+}
+
 #####################################################################################2022.02.12
 SecondNewApp_Email
 import UIKit
