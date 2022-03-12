@@ -1,4 +1,23 @@
 # TIL
+#####################################################################################2022.03.12
+국내IT기업목록
+[https://techcompanies.kr](https://techcompanies.kr/)
+
+[https://docs.google.com/spreadsheets/d/1U28rQ6j0_byb1Tola_ZB8xsDsV1MlH1M66Sex6Qk3oM/edit#gid=0](https://docs.google.com/spreadsheets/d/1U28rQ6j0_byb1Tola_ZB8xsDsV1MlH1M66Sex6Qk3oM/edit#gid=0)
+
+
+무료 웹디자인툴 5가지
+https://www.youtube.com/watch?v=0Pwxh1XL-Fk
+
+
+웹개발 트렌드(개발자라면 알아두면 돈이되는 트렌드)
+https://youtu.be/CFITb_7Duxs
+
+
+
+99.9%를 압축해버리는 동영상 압축 원리
+https://youtu.be/itdPTcBHRbM
+
 #####################################################################################2022.03.10
 #infix(중위) 연산자의 경우, 연산자의 "우선 순위 그룹"을 지정해야함 (우선 순위, 결합성)
 // 중위연산자가 아닌 경우는 지정할 필요없음
