@@ -1,4 +1,17 @@
 # TIL
+#####################################################################################2022.03.13
+Design Pattern [https://refactoring.guru/refactoring/what-is-refactoring](https://refactoring.guru/refactoring/what-is-refactoring)
+
+Colorhunt 색깔진수 [https://colorhunt.co](https://colorhunt.co/)
+
+화면크기pixcels [paintcodeapp.com](http://paintcodeapp.com)
+
+App Icon Generator(이미지 변환1x, 2x, 3x)  [https://appicon.co](https://appicon.co/)
+
+이미지만들기(앱)  [https://canva.com](https://www.canva.com/ko_kr/)
+
+
+
 #####################################################################################2022.03.12
 국내IT기업목록
 [https://techcompanies.kr](https://techcompanies.kr/)
