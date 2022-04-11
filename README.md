@@ -1,4 +1,29 @@
 # TIL
+#####################################################################################2022.04.11
+Delegate Protocol
+### **Delegate 를 위임받는 뷰**
+
+- 여기서는 `FirstViewController.swift`
+1. ViewController 에 **Delegate Protocol** 채택 & Protocol **필수 method** 구현
+
+```swift
+extension FirstViewController: CustomTextFieldDelegate {
+    func textDidInput(didInput text: String) { // 프로토콜의 요구사항(필수 메서드)
+        label.text = text
+    }
+}
+```
+
+1. Delegate 위임
+
+```swift
+@objc private func handleButton(_ sender: UIButton) {
+    let nextVC = SecondViewController()
+    nextVC.delegate = self
+    self.present(nextVC, animated: true, completion: nil)
+}
+
+
 #####################################################################################2022.03.13
 Design Pattern [https://refactoring.guru/refactoring/what-is-refactoring](https://refactoring.guru/refactoring/what-is-refactoring)
 
