@@ -1,5 +1,13 @@
 # TIL
 #####################################################################################2022.04.17
+
+여러 프로토콜을 채택할 수 있다.
+class MyClass: Superclass, FirstProtocol, AnotherProtocol {
+        //class definition goes here
+]
+
+
+
 **텍스트필드 편집 종료, 중지시에 텍스트필드 초기화**
 textFieldDidEndEditing
 텍스트필드 편집 종료,중지 했습니다.
