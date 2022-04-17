@@ -1,4 +1,27 @@
 # TIL
+#####################################################################################2022.04.17
+**텍스트필드 편집 종료, 중지시에 텍스트필드 초기화**
+textFieldDidEndEditing
+텍스트필드 편집 종료,중지 했습니다.
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        //"텍스트필드 초기화"
+        searchTextField.text = ""
+    }
+    
+
+**텍스트필드가 반환 되야해 어떻게할까?(키보드가 닫혔어 뭘 할래?)**
+**textFieldShouldEndEditing**
+func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        //텍스트필드 텍스트에 빈 문자열이 아니면 실행, 아니면 else
+        if textField.text != "" {
+            return true
+        } else {
+            //텍스트가 빈 문자열이기 때문에~ 플레이스홀더: "Type something" 표시
+            textField.placeholder = "Type something"
+            return false
+        }
+    }
+
 #####################################################################################2022.04.14
 #3,4 Test
 
