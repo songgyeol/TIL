@@ -1,4 +1,9 @@
 # TIL
+#####################################################################################2022.05.03
+Code Sense
+https://stackoverflow.com/questions/6662395/xcode-intellisense-meaning-of-letters-in-colored-boxes-like-f-t-c-m-p-c-k-etc
+
+
 #####################################################################################2022.04.26
 RocketPunch, Wanted Profile
 
