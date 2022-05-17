@@ -1,4 +1,55 @@
 # TIL
+
+#####################################################################################2022.05.17
+# 🚀'사람' 송결을 소개합니다.
+
+### 첫시작
+
+[고등학교(토목과) - 대학교(물리치료학과,자퇴) - 직장생활(5년차,퇴사) - iOS Developer]
+
+안녕하세요. iOS 개발자 송결입니다.
+Swift, UIKit을 중심으로 여러가지 프로젝트를 진행 및 구상하고 있습니다.
+여러 사람들과 협업하는 것에 매력을 느끼고 있으며, 적극적인 커뮤니케이션을 통해 프로젝트 진행 중 직면하는  문제들을 풀어나가고 있습니다.
+새로운 기술을 배우는 것을 좋아하고, 어려운 문제에 도전하는 것을 좋아하는 성격을 바탕으로                          즐기는 iOS 개발자가 되고싶습니다.
+늦었다 생각한만큼 꾸준함 하나로 “즐기는 개발자”되기 위해 한 걸음씩 나아 가고 있습니다.
+
+---
+
+# 🚀'iOS Developer' 송결을 소개합니다.
+
+### 수료과정
+
+- KXCording - Mastering Swift, iOS
+- INFREARN - 앨런 Swift문법 마스터 스쿨(Online BootCamp, iOS App Develop
+- Udemy - iOS & Swift The Complete iOS App Development Bootcamp
+
+### 경험 및 보유 역량
+
+- Swift와 UIKit을 활용한 iOS앱 개발 능력
+- SwiftUI에 대한 기초적인 이해
+- CocoaPods을 이용한 Dependency Managing
+- MVC에 대한 이해
+- 새로운 기술에 대한 적극적인 관심
+- 지속적인 학습과 의지 보유
+
+### 출시앱(진행중)
+
+**CollaboGame - ios**
+
+## **Architecture**
+
+- MVC
+
+## **Requirements**
+
+- **Language**
+
+- Swift 5.0
+
+- **Framework**
+
+- UIKit
+
 #####################################################################################2022.05.03
 Code Sense
 https://stackoverflow.com/questions/6662395/xcode-intellisense-meaning-of-letters-in-colored-boxes-like-f-t-c-m-p-c-k-etc
