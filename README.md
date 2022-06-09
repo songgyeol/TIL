@@ -1,4 +1,28 @@
 # TIL
+
+
+[AppStore]
+리젝[https://imjeongwoo.tistory.com/51](https://imjeongwoo.tistory.com/51)
+
+[https://blog.naver.com/PostView.nhn?blogId=y2kelvin&logNo=220421796782](https://blog.naver.com/PostView.nhn?blogId=y2kelvin&logNo=220421796782)
+
+아카이브 활성화 [https://ithub.tistory.com/255](https://ithub.tistory.com/255)
+
+[앱출시][https://ios-development.tistory.com/299](https://ios-development.tistory.com/299)
+
+[https://hsdev.tistory.com/entry/iOS-앱-배포-5-xcode-Archive-하기](https://hsdev.tistory.com/entry/iOS-%EC%95%B1-%EB%B0%B0%ED%8F%AC-5-xcode-Archive-%ED%95%98%EA%B8%B0)
+
+[앱출시필요][https://ios-development.tistory.com/382](https://ios-development.tistory.com/382)
+
+등록 xcode,archive [https://blog.naver.com/ohhorala/222146216018](https://blog.naver.com/ohhorala/222146216018)
+
+[개인정보처리방침]
+
+[https://blog.naver.com/shinequasar/222476235631](https://blog.naver.com/shinequasar/222476235631), [https://blog.naver.com/yshan1008/222084179151](https://blog.naver.com/yshan1008/222084179151)
+
+[앱출시변경사항] [https://docko.tistory.com/772](https://docko.tistory.com/772)
+
+
 Reject - Re-registration
 # 1. **Your App Review Feedback**
 
