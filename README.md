@@ -1,4 +1,77 @@
 # TIL
+cocoapods
+1. CocoaPods 이란?
+
+- "코코아 프로젝트"에 대한 의존성 패키지를 관리 도구
+   Cocoa : 코코아 개발 환경
+   pod : 라이브러리를 의미
+    -> CocoaPods : 코코아 개발 환경에서의 라이브러리들
+ 
+*CocoaPods이 없다면?
+ github에 있는 라이브러리들은 자동 업데이트가 이루어지지 않기 때문에 버전관리가 힘듦
+ 
+ 1. Alamofire
+
+- HTTP네트워크 통신을 위한 스위프트 기반으로 개발된 비동기 라이브러리
+2. Alamofire를 이용한 요청과 응답
+
+ 1) 요청(request) : Alamofire.request(...)
+ // import Alamofire
+let param: Parameters = [
+    "userId" : "imustang",
+    "name" : "iOS개발 블로거"
+]
+ 
+let headers: HTTPHeaders = [
+    "Authorization" : "123",
+    "Accept" : "application/json"
+]
+ 
+let req = Alamofire.request("호출할 URL",
+                              method: .post,
+                              parameters: param,
+                              encoding: JSONEncoding.default,
+                              headers: headers)
+
+ - Parameters 자료형은 Alamofire프레임워크 속 자료형 [String : Any]
+ - 안에 들어갈 Key값은 서버에서 제공하는 API문서를 보고 확인
+ - 단, 12번라인에서 요청을 하는 동시에 req에 응답이 들어옴
+ * 파라미터 
+ - method : 생략할 시 GET방식
+ - parameters : 항상 딕셔너리형태
+ - encoding : .methodDependent (메소드에 따라 인코딩 타입이 자동으로 결정)
+                     .JSONEncoding.default (JSON파일)
+                     .queryString (GET 전송에서 사용되는 방식)
+                     .httpBody (POST 전송에서 사용되는 방식)
+ - headers : 딕셔너리형태
+ 2) 응답(response)
+- 응답되는 형식은 API문서를 보고 확인
+1
+2
+3
+4
+5
+6
+7
+8
+9
+req.responseJSON() {res in
+    print(response.result.value!)
+    
+    guard let jsonObj = res.result.value as? [String: Any] else {return}
+ 
+    let v1 = jsonObj["userId"]!
+    let v2 = jsonObj["name"]!
+}
+ 
+ 
+ 
+ - 1번째 줄에, 응답으로 받을 자료형을 구분해줄 수 있음
+ responseString()
+ responseJSON()
+ responseData() // 응답 메시지의 본문을 바이너리 데이터로 반환하여 전달
+
+
 
 프레임워크의 특징과 프레임워크와 라이브러리 차이점은 무엇인지 설명하시오.👉🏻 Framework란 소프트웨어 환경에서 복잡한 문제를 해결하거나 서술하는데 사용되는 기본 개념 구조입니다. 뼈대가 되는 부분을 미리 구현한 클래스, 인터페이스 , 메소드 등의 모음이라고 할 수 있습니다. 프레임워크는 설계자가 의도한 여러 디자인 패턴으로 구성되어 있습니다. 따라서 개발자가 에플리케이션의 구조적 설계를 신경 쓸 필요가 없습니다. 또한 일정 수준 이상의 품질을 보증하는 코드를 비교적 빠르고 편하게 완성 및 유지보수할 수 있는 솔루션이라고 할 수 있습니다.👉🏻 라이브러리와 프레임워크는 애플리케이션의 틀과 구조를 결정한다는 측면에서 활용도가 상당히 유사하나 라이브러리는 특정 기능이 필요할 때 호출해서 쓰는 도구 모음입니다. 프레임워크가 큰 뼈대는 이미 잡혀있고 그 안의 내용물을 채우는 느낌이라면 라이브러리는 개발자가 호출해서 능동적으로 사용하는 것이라고 볼 수 있습니다. 즉, 프레임워크는 꼭 써야되는 것과 지켜야되는 룰이 있는 반면 라이브러리는 쓰든 안쓰든 개발자 마음대로 할 수 있다는 점에서 차이가 있습니다.(+) Spring Framework자바(JAVA) 플랫폼을 위한 오픈소스 애플리케이션 프레임워크자바 엔터프라이즈 개발을 편하게 해주는 오픈소스 경량급 애플리케이션 프레임워크자바 개발을 위한 프레임워크로 종속 객체를 생성해주고, 조립해주는 기구자바로 된 프레임워크로 JavaSE로 된 자바 객체(POJO)를 JavaEE에 의존적이지 않게 연결해주는 역할특징크기와 부하의 측면에서 경량제어 역행(IOC)이라는 기술을 통해 애플리케이션의 느슨한 결합을 도모.관점 지향 프로그래밍(AOP)을 위한 풍부한 자원애플리케이션 객체의 생명주기와 설정을 포함하고 관리한다는 점에서 일종의 컨테이너라고 할 수 있음간단한 컴포넌트로 복잡한 애플리케이션을 구성하고 설정할 수 있음
 
