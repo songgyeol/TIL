@@ -1,4 +1,102 @@
 # TIL
+AppDelegate vs SceneDelegate
+
+iOS 13 이전에는 AppDelegate가 app의 launch, foregrounding, backgrounding 등 App Life-Cycle을 관리하는 책임을 갖고 있었습니다. 그러나 iOS 13부터는 일부 역할을 SceneDelegate에게 넘겨주었습니다. 그러면 현재의 AppDelegate 역할을 무엇일까요?
+
+# AppDelegate
+
+**AppDelegate**은 iOS 버전에 무관하게 **application의 entry point** 역할과 **application level의 life-cycle을 관리**하는 역할을 합니다. Apple은 AppDelegate.swift에 기본적으로 중요하다고 여기는 3개의 method들을 구현해 놓았습니다. 설명이 주석으로 매우 잘 적혀있긴 하지만 간단히 살펴보도록 합시다.
+
+**1. func application(_: didFinishLaunchingWithOptions: ) -> Bool**
+
+application의 setup을 이 메소드 안에서 진행하게 됩니다. iOS 12 이하 버전은 multiple window를 지원하지 않았어서 UIWindow 객체에 대한 configuration도 진행했었는데 이제는 multiple window를 지원하기 때문에 하나의 window 객체만 관리하는게 말이 되지 않죠.
+
+**2. func application(_: configurationForConnecting:options: ) -> UISceneConfiguration**
+
+application이 새로운 scene/window를 제공하려고 할 때 불리는 메소드입니다. (최초 launch 때 불리는 메소드 아님)
+
+**3. func application(_: didDiscardSceneSessions: )**
+
+사용자가 scene을 버릴 때 불립니다. 버리는 상황이려면 swipe로 multitasking windwo를 없앤다던지, 코드로서 없애는 경우가 있습니다.
+
+### 기타 역할
+
+- URL 열기
+- memory warning wkqrl
+- 언제 종료(terminate) 될 지 잡기 등
+
+# SceneDelegate
+
+간단히 말해서 SceneDelegate은 **화면에 무엇(scene/window)을 보여줄지 관리하는 역할**을 합니다. Apple이 기본적으로 제공해주는 메소드와 주석을 통해 조금 더 알아보겠습니다.
+
+**1. scene(_: willConnectTo: options: )**
+
+UISceneSession lifecycle에서 제일 처음 불리는 메소드로 첫 content view, 새로운 UIWindow를 생성하고 window의 rootViewController를 설정합니다. 이 때 헷갈리지 말아야 할 것은 'window'가 사용자가 보는 window가 아니라 app이 작동하는 viewport를 나타낸다는 것이죠. 첫 view를 만드는데 쓰이기도 하지만 과거에 disconnected 된 UI를 되돌릴 때도 쓰기도 합니다.
+
+**2. sceneWillEnterForeground(_ :)**
+
+위 과정이 끝나면 sceneWillEnterForeground가 불리게 되는데 scene이 foreground로 전환될 때 불리는 데 두가지 경우가 있겠죠? 1) background → foreground 가 되었을 때 2) 그냥 처음 active 상태가 되었을 때
+
+**3. sceneDidBecomeActive(_ :)**
+
+다음으로 불리는 메소드는 sceneDidBecomeActive(_ :)로 scene이 setup 되고 화면에 보여지면서 사용 될 준비가 완료 된 상태입니다. inactive → active로 전환 될 때도 불리겠죠. 그래서 inactive상태가 되면서 멈춘 task를 재실행할 수도 있고 만약 처음 불렸다면 사용 준비가 완료되었으니 사용하면 됩니다.
+
+**4. sceneWillResignActive(_ :)**
+
+active한 상태에서 inactive 상태로 빠질 때 불리는데 사용 중 전화가 걸려오는 것 처럼 임시 interruption 때문에 발생할 수 있습니다.
+
+**5. sceneDidEnterBackground(_ :)**
+
+scene이 foreground에서 background로 전환 될 때 불리게 되므로 다음에 다시 foreground에 돌아 올 때 복원할 수 있도록 state 정보를 저장하거나, 데이터를 저장, 공유 자원 돌려주는 등의 일을 하도록 하면 됩니다.
+
+**6. sceneDidDisconnect(_ :)**
+
+scene이 background로 들어갔을 때 시스템이 자원을 확보하기 위해 disconnect하려고 할 수도 있습니다. (disconnect는 app을 종료시킨 것과는 다르다고 합니다! scene이 이 메소드로 전달되면 session에서 끊어진다는 것 뿐입니다.) 이 메소드 내에서 해야 할 가장 중요한 작업은 필요 없는 자원은 돌려주는 것입니다. 가령 디스크로나 네트워크를 통해 쉽게 불러올 수 있거나 생성이 쉬운 데이터들은 돌려주고, 사용자의 input과 같이 재생성이 어려운 데이터는 갖고 있게끔 하는 작업을 해주어야 합니다.
+
+# **iOS 13 이후 버전의 AppDelegate**
+
+그러나 iOS 13으로 넘어오면서 **1 process & multiple user interface(= scene sessions)** 를 지원하게 되었다. 실제로 plist의 Application Scene Manifest를 보면 기존에는 없던 Enable Multiple Windows가 포함되어 있다.기존에는 AppDelegate에서 UIWindow 객체에 대한 configuration도 진행했었는데 이제는 하나의 window 객체만 관리하지 못한다.AppDelegate의 일부 역할을 SceneDelegate에게 넘겨주었고, AppDelegate은 새로운 역할을 하나 더 맡게 되었다.
+
+1. process level의 이벤트 발생을 알려주고 (그대로)
+2. session life-cycle을 application에게 알려주게 되었다. (신규)
+
+# **SceneDelegate**
+
+**UI의 상태변화를 메소드들을 통해 application에게 알리는 역할**을 한다. 기존 AppDelegate들이 갖고 있던 메소드들과 거의 1:1 mapping이 가능하다.SceneDelegate은 아래의 메소드를 갖고 있다.
+
+- `scene(_: willConnectTo: options:)`
+- `sceneWillEnterForeground(_ :)`
+- `sceneDidBecomeActive(_ :)`
+- `sceneWillResignActive(_ :)`
+- `sceneDidEnterBackground(_ :)`
+- `sceneDidDisconnect(_ :)`
+
+### **실제 call stack 따라가보기**
+
+1. AppDelegate: didFinishLaunching → UI와 무관한 일회성 setup을 이곳에서 해도 무방하다
+2. system이 scene session을 생성했다. (UI Scene 아님)
+3. AppDelegate: UISceneConfiguration
+4. SceneDelegate: scene willConnectTo
+
+**User가 Home 화면으로 돌아갔다**
+
+1. SceneDelegate: willResignActive
+2. SceneDelegate: didEnterBackground
+3. SceneDelegate: didDisconnect
+
+> didDisconnect 살펴보기 system은 한정 된 자원을 가지고 있기 때문에 자원을 언젠가는 회수를 해야 한다. 따라서 scene이 background에 들어간 후 어느 시점에 scene을 memory로부터 해제시킨다. 즉,
+> 
+> 1. scene delegate이 메모리에서 해제됨
+> 2. scene delegate이 관리하던 window 및 view 계층 메모리에서 해제됨
+
+> 따라서 didDisconnect코드 내부에서는 scene과 관련된 불필요한 자원을 돌려주는 작업을 해주면 된다. 가령 디스크나 네트워크를 통해 쉽게 데이터를 다시 불러올 수 있다거나재생성이 쉬운 데이터는 돌려주는게 좋지만 scene이 다시 reconnect 될 수 있으므로 사용자의 input과 같이 재생성이 어려운 데이터는 가지고 있어야 하니 데이터를 무조건적으로 영구삭제하면 안된다.
+> 
+
+**User가 app switcher틑 통해 app 종료**
+
+1. AppDelegate: didDiscardSceneSessions → 이 곳에서 user data, state 등 scene과 관련된 모든 데이터를 지우는 작업을 해주면 된다.
+
+
 Struct vs Class
 # **Class와 Struct의 차이점?**
 
