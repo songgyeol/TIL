@@ -1,4 +1,220 @@
 # TIL
+DelegatePattern2
+# **Delegate Pattern**
+
+iOS 개발 패턴중 가장 중요한 패턴이다. Apple framework를 사용하기 위해서는 반드시 알아야할 패턴이다.
+
+- 어떤 객체와, 객체의 기능을 대신 수행할 델리게이트 객체가 필요하다.
+- 예를들면, 상품을 표시하는 TableView를 터치하면, 상세 페이지로 이동하는 기능이 있다고 한다. 이때, 사용자가 TableView를 선택했을때, TableView객체는 어떤 기능을 실행해야 할지 모른다. 따라서 델리게이트 객체가 이(상세 페이지로 이동하는 기능)를 수행한다.
+- 델리게이트를 사용하는 TableView 객체는 `...dataSource` 혹은 `...delegate` 라는 접미어를 가진다.
+- 사용자가 TableView를 터치하게 되면, TableView는 직접 기능을 수행하지 못하므로, 대리자의 함수를 호출하고, 이때 대리자(델리게이트 객체)가 대신 기능을 수행한다.
+- 특정 이벤트 때 호출되는 메소드는 프로토콜에 선언되어있어야 한다.
+- 그리고 당연히 프로토콜에 선언되어있는것과 일치하게 메소드를 구현해야한다.
+
+(테이블뷰같은 경우에는, 보통 자신을 포함하고 있는 뷰컨트롤러를 대리자로 지정한다.)
+
+### 델리게이트 패턴을 사용하는 이유
+
+**iOS에서 프로토콜을 사용하여 델리게이션을 구현하는 것은 클래스가 단일 상속만을 지원하기 때문이다. 즉, 하나의 부모 클래스를 상속받고 나면 더는 다른 클래스를 상속받을 수 없으므로 기능을 덧붙이기에는 제한적이다. 이를 극복하기 위해 구현 개수에 제한이 없는 프로토콜을 이용하여 필요한 기능 단위별 객체를 작성한다.**
+
+= 개발의 유연성이 증가한다.
+
+### 
+
+### 델리게이트 구현 순서
+
+ios에서 델리게이트의 역할은 크게 두가지이다.
+
+1. 데이터 공급 (이러한 경우에는 `...DataSource` 라는 접미어를 가진다.)
+2. 이벤트 처리 (`...Delegate` 접미어를 가진다.)
+
+그리고 **모든 컨트롤에서 델리게이트를 필요로 하는것이 아니다.** 예를들어 `TextField`에서는 데이터를 공급할 필요가 없기 때문에, `...DataSource`는 필요하지 않다.
+
+1. 어떤 객체를 생성할때, Delegate가 필요한 객체인지 먼저 개발자 문서에서 확인한다.
+2. 필요하다면, 구현하고자 하는 메소드의 프로토콜을 확인한다. (이때 개발자 문서에`required`라고 표시된 메소드는 반드시 구현해야하는 메소드이다.)
+3. `구현하고자 하는 객체` - `Delegate 객체` 를 연결해준다.
+4. `Delegate 객체`에서 프로토콜을 구현해준다.
+
+## TableView Delegate Pattern (코드 구현)
+
+```swift
+import UIKit
+
+classViewController:UIViewController {
+
+// MARK: 프로퍼티let myTableView =UITableView()
+let items = ["swift", "iOS", "TableView"]
+
+// MARK: ViewController override methodoverridefuncviewDidLoad() {
+super.viewDidLoad()
+
+self.myTableView.dataSource =selfself.myTableView.delegate =selfself.myTableView.register(UITableViewCell.self,
+                            forCellReuseIdentifier: "cell")
+self.view.addSubview(self.myTableView)
+
+self.myTableView.translatesAutoresizingMaskIntoConstraints = false
+self.view.addConstraint(NSLayoutConstraint(item:self.myTableView,
+      attribute: .top, relatedBy: .equal, toItem:self.view, attribute: .top,
+      multiplier: 1.0, constant: 0))
+self.view.addConstraint(NSLayoutConstraint(item:self.myTableView,
+      attribute: .bottom, relatedBy: .equal, toItem:self.view,
+      attribute: .bottom, multiplier: 1.0, constant: 0))
+self.view.addConstraint(NSLayoutConstraint(item:self.myTableView,
+      attribute: .leading, relatedBy: .equal, toItem:self.view,
+      attribute: .leading, multiplier: 1.0, constant: 0))
+self.view.addConstraint(NSLayoutConstraint(item:self.myTableView,
+      attribute: .trailing, relatedBy: .equal, toItem:self.view,
+      attribute: .trailing, multiplier: 1.0, constant: 0))
+  }
+
+}
+
+// MARK: UITableViewDelegateextensionViewController :UITableViewDelegate {
+
+functableView(_ tableView:UITableView, didSelectRowAt indexPath:IndexPath) {
+    print(items[indexPath.row])
+  }
+}
+
+// MARK: UITableViewDataSourceextensionViewController:UITableViewDataSource {
+
+functableView(_ tableView:UITableView,
+                  numberOfRowsInSection section:Int) ->Int {
+returnself.items.count
+  }
+
+functableView(_ tableView:UITableView,
+                  cellForRowAt indexPath:IndexPath) ->UITableViewCell {
+
+let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+
+        cell.textLabel?.text = items[indexPath.row]
+
+return cell
+  }
+}
+
+```
+
+## Text Field Delegate Pattern
+
+- 델리게이트 지정은 보통 viewDidLoad() 안에서 한다.
+- `UITextFieldDelegate` 에는 필수 메소드가 없다.
+- 단순히 입력값을 받는 것은 델리게이트가 필요없지만, 특정 기능을 사용하려면 필수적이다.
+- 특정 기능은 숫자만 입력값으로 받기, 입력 문자의 개수를 제한하기, 등등의 제어기능을 말한다.
+
+```swift
+import UIKit
+
+classTextFieldViewController :UIViewController{
+
+@IBOutletweakvar inputField :UITextField!
+
+overridefuncviewDidLoad(){
+super.viewDidLoad()
+    inputField.delegate =self
+  }
+}
+
+extensionTextFieldViewController:UITextFieldDelegate {
+
+}
+```
+
+## 
+
+## Protocol Extension
+
+### 델리게이트를 이용해서 이전 화면으로 값 전달하기
+
+> ComposeDelegate.swift  ( 프로토콜 선언 파일 )
+> 
+
+```swift
+import UIKit
+
+protocolComposeDelegate {
+funccomposer(_ vc:UIViewController, didInput value :String?)
+funccomposerDidCancel(_ vc:UIViewController)
+}
+```
+
+- delegate 속성은 대부분 옵셔널 프로토콜 형식으로 선언한다.
+
+> CustomDelegateViewController.swift (이전 화면)
+> 
+
+```swift
+import UIKit
+
+classCustomDelegateViewController:UIViewController {
+
+@IBOutletweakvar valueLabel:UILabel!
+
+overridefuncprepare(for segue:UIStoryboardSegue, sender:Any?) {
+iflet vc = segue.destination.children.firstas?ComposeViewController {
+            vc.delegate =self
+        }
+    }
+@objcfuncpresentComposeVC() {
+        performSegue(withIdentifier: "ComposeSegue", sender: nil)
+    }
+overridefuncviewDidLoad() {
+super.viewDidLoad()
+
+        navigationItem.rightBarButtonItem =UIBarButtonItem(barButtonSystemItem: .add, target:self, action: #selector(presentComposeVC))
+    }
+}
+extensionCustomDelegateViewController :ComposeDelegate {
+funccomposer(_ vc:UIViewController, didInput Value:String?) {
+        valueLabel.text =Value
+    }
+funccomposerDidCancel(_ vc:UIViewController) {
+        valueLabel.text = "Cancel"
+    }
+}
+```
+
+> ComposeViewController.swift (다음화면)
+> 
+
+```swift
+import UIKit
+
+classComposeViewController:UIViewController {
+
+var delegate :ComposeDelegate?
+
+@IBOutletweakvar inputField:UITextField!
+
+@IBActionfuncperformCancel(_ sender:Any) {
+        delegate?.composerDidCancel(self)
+        dismiss(animated: true, completion: nil)
+    }
+
+@IBActionfuncperformDone(_ sender:Any) {
+        delegate?.composer(self, didInput: inputField.text)
+        dismiss(animated: true, completion: nil)
+    }
+
+overridefuncviewDidLoad() {
+super.viewDidLoad()
+self.inputField.delegate =selfif#available(iOS 13.0, *) {
+            isModalInPresentation = true
+        }
+    }
+}
+
+extensionComposeViewController :UITextFieldDelegate {
+functextFieldShouldReturn(_ textField:UITextField) ->Bool {
+        delegate?.composer(self, didInput:self.inputField.text)
+        dismiss(animated: true, completion: nil)
+return true
+    }
+}
+```
+
+
 DelegatePattern
 > Delegation은 상속만큼 재사용을위한 구성을 강력하게 만드는 방법입니다. Delegation에서 요청을 처리하는 데 두 가지 개체가 포함됩니다. 받는 개체(receiving object)는 작업을 대리자(delegate)에게 위임(delegate)합니다. 이것은 부모 클래스에 대한 요청을 연기하는 서브 클래스와 유사합니다. .... 위임과 동일한 효과를 얻기 위해 수신자는 위임 된 작업이 수신자를 참조하도록 대리자에게 자신을 전달합니다.
 > 
