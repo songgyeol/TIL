@@ -1,4 +1,74 @@
 # TIL
+DelegatePattern
+> Delegation은 상속만큼 재사용을위한 구성을 강력하게 만드는 방법입니다. Delegation에서 요청을 처리하는 데 두 가지 개체가 포함됩니다. 받는 개체(receiving object)는 작업을 대리자(delegate)에게 위임(delegate)합니다. 이것은 부모 클래스에 대한 요청을 연기하는 서브 클래스와 유사합니다. .... 위임과 동일한 효과를 얻기 위해 수신자는 위임 된 작업이 수신자를 참조하도록 대리자에게 자신을 전달합니다.
+> 
+
+정의의 내용을 정리해 보면 Delegate를 위해선 세 가지가 필요 합니다.1. 수신자      *Receiver*2. 대리자      *Delegate*3. 대리자에게 수신자 자신을 전달
+
+간단히 설명하면 대리자는 수신자로 부터 수신자 자신의 객체를 전달 받고, 그 객체를 이용한 행동을 취했들 때(메소드 호출 등) 수신자는 그 결과를 받게됩니다. 말로만 설명하면 무슨 말인지 모르겠으니 코드를 통해 보겠습니다.
+
+```swift
+class Receiver {
+    let button = Delegate()
+
+    init() {
+        button.delegate = self  //대리자에게 자신을 전달
+    }
+
+    func helloWorld() {
+        print("Hello World")
+    }
+}
+
+class Delegate {
+    weak var delegate: Sender?
+
+    func didTapButton() {
+        delegate?.helloWorld()
+    }
+}
+```
+
+수신자는 위임자에게 self로 자기 자신을 넘겨주고 위임자는 수신자 객체의 메소드를 '대신' 실행하는 것을 보실 수 있습니다. 그리고 위임자에서 메소드가 호출 되면 수신자에 정의된 함수가 실행됩니다.
+
+하지만 여기엔 한 가지 문제가 있습니다. 지금 처럼 class 형태로 객체를 넘겨주게 되면 동일한 delegate를 사용하기 위해선 반드시 상속을 받아야 한다는 것이지요. 이렇게 되면 기능 확장에 큰 걸림돌이 됩니다.
+
+따라서 swift에선 대부분 protocol을 이용해 delegate 패턴을 구현합니다.
+
+```swift
+protocol TapDelegate: class {
+    func helloWorld()
+}
+
+class Receiver: TapDelegate {
+    let button = Delegate()
+
+    init() {
+        button.delegate = self
+    }
+
+    func helloWorld() {
+        print("Hello World")
+    }
+}
+
+class Delegate {
+    weak var delegate: TapDelegate?
+
+    func didTapButton() {
+        delegate?.helloWorld()
+    }
+}
+```
+
+수신자는 원하는 기능을 포함한 Delegate Protocol을 구현합니다. 그리고 자기 자신을 Protocol의 형태로 전달해 주게 되면 동일한 기능을 수행해내면서 여러가지 Delegate들을 이용할 수 있게 됩니다.
+
+
+
+
+
+
+
 AppDelegate vs SceneDelegate
 
 iOS 13 이전에는 AppDelegate가 app의 launch, foregrounding, backgrounding 등 App Life-Cycle을 관리하는 책임을 갖고 있었습니다. 그러나 iOS 13부터는 일부 역할을 SceneDelegate에게 넘겨주었습니다. 그러면 현재의 AppDelegate 역할을 무엇일까요?
