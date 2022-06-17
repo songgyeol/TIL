@@ -1,4 +1,43 @@
 # TIL
+ViewController's Life Cycle
+1. loadView
+view controller의 view property를 불렀는데 아직 nil 상태일 때 불리는 메소드에요.
+만약 루트 뷰를 직접 만들고 있다면 이 메소드를 override해서 꼭 view property에 assign 해주셔야 합니다.
+ 
+* 주의 *
+- 절대 loadView( )를 직접 호출하면 안됩니다!!
+- 만약 interface builder를 통해 뷰를 만들고 있다면 loadView를 override 하면 안됩니다. 
+- view에 대한 추가적인 초기화를 진행하고 싶다면 viewDidLoad에서 하는 것이 권장되고 있습니다.
+ 
+2. viewDidLoad
+스토리보드의 view나 코드로 작성한 view가 메모리에 올라온 직후 불리는 메소드 입니다. 
+IBOutlet을 연결할 때 @IBOutlet private var titleLabel: UILabel! 처럼 force unwrapping 해 본 경험이 있으실겁니다.
+흔히 force unwrapping은 권장되지 않는 방법이지만, IBOutlet에서 가능한 이유는 viewDidLoad가 불리면 이 변수들에 값이 있음을 보장할 수 있기 때문입니다.
+화면에 디스플레이 되는 것과는 별개인 메소드이므로 화면이 보이기 전에 처리하면 좋을 백그라운드 작업(ex. network call)을 하면 좋겠죠?
+ 
+3. viewWillAppear
+view가 view hierarchy에 추가되기 직전에 불리는 메소드입니다. 다른말로, 화면에 보여지기 직전에 불리는 메소드입니다.
+하지만 항상 사용자가 보는 화면에 보일 필요는 없는 것이 view.isHidden = true 로 프로퍼티가 설정이 되어 있다면 안보이겠죠.
+그러니 실제로 보이는 것과 별개로 view가 view hierarchy에 추가되기 직전임을 알고 있으면 좋을 것 같네요.
+ 
+**viewDidLoad vs viewWillAppear**
+간단한 예시로 살펴보도록 하겠습니다.
+navigationController?.setNavigationBarHidden(true, animated: true) 코드를 짜보신적 있으신가요?
+Navigation Controller는 상단에 위치해서 공간을 차지하는데요, navigation이 가능한 화면일지라도 첫 화면은 navigation bar가 없기를 바랄 때가 있죠. 그래서 navigation bar를 숨기기 위해 setNavigationBarHidden(true, animated: true) 을 사용하게 되는데,
+viewDidLoad에서 작업을 하게 되면, 제일 처음에는 불려서 원하는 화면을 볼 수 있겠지만, 화면 전환 이후 다시 돌아오면 viewDidLoad는 불리지 않아서 navigation bar가 보이게 됩니다. 따라서 사용자에게 화면이 나타날 떄마다 실행되었으면 하는 작업이 있다면 viewWillAppear에서 해주면 됩니다.
+ 
+4. viewDidAppear
+view가 view hierarchy에 추가된 직후에 불리는 메소드입니다. 이 메소드가 불리고 나면 사용자는 화면을 보고 있을겁니다.
+이제 사용자가 화면을 볼 수 있으니 이 메소드에서 animation을 시작하거나, 음악 재생, 사용자 데이터 수집 등을 시작하면 좋을
+이 때 animation을 시작하거나, 음악을 재생하거나, 수집하는 사용자 데이터가 있다면 이 때부터 수집을 시작하면 됩니다.
+ 
+5. viewWillDisappear
+content view가 view hierarchy에서 제거되기 직전에 불리는 메소드입니다. 이 메소드가 불릴 때 까지는 사용자에게 화면이 보이기 때문에 UITextField 등을 사용해서 값을 입력받고 있었다면 저장을 하는 등의 작업을 해주면 좋습니다.
+ 
+6. viewDidDisappear
+content view가 view hierarchy에서 제거된 직후에 불리는 메소드입니다. 완전히 사라지고 난 후에 불리는 메소드이므로 화면이 없어지면 응당 멈춰야 할 작업들을 멈춰주면 됩니다. Notification을 삭제할 수도 있고, 다른 객체를 관찰 중이었다면 중단하고, 자이로스코프 센서 등의 시스템 센서를 사용하고 있었다면 중단할 수 있겠죠?
+
+
 DelegatePattern2
 # **Delegate Pattern**
 
