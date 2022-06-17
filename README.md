@@ -1,4 +1,41 @@
 # TIL
+****App Lifecycle****
+앱 생명주기는 앱이 화면상에 보이는 foreground 상태, 보이지 않는 background 상태 등과 같은 상태를 정의한 것 입니다.  홈버튼을 누르거나, 전화가 와서 화면이 전환되는 등 앱의 상태변화를 이해하기 위해서는 앱 생명주기를 이해할 필요가 있습니다.
+
+아래 이미지는 애블 개발자센터에서 제공하는 앱 상태 전환에 대한 이미지입니다.
+
+![app-state2x.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3ddd5ea3-0392-44c1-8f2d-da6278a78e09/app-state2x.png)
+
+각 상태에 대한 설명 입니다.
+
+Not Running: 앱이 실행되지 않은 상태
+
+***(Inactive와 Active 상태를 합쳐서 Foreground 라고 함)***
+
+Inactive: 앱이 실행중인 상태 그러나 아무런 이벤트를 받지 않는 상태
+
+Active: 앱이 실행중이며 이벤트가 발생한 상태
+
+Background: 앱이 백그라운드에 있는 상태 그러나 실행되는 코드가 있는 상태
+
+Suspened: 앱이 백그라운드에 있고 실행되는 코드가 없는 상태
+
+AppDelegate.swift에 아래와 같이 앱의 상태에 따라 실행되는 delegate 함수들이 정의되어 있기때문에 함수안에 코드를 작성 함으로써 앱의 특정 상태에서 동작하는 로직을 구현 할 수 있습니다.
+
+**application(_didFinishLaunching) :** 앱이 처음 시작될 때 실행
+
+**applicationWillResignActive :**  앱이 active 에서 inactive로 이동될 때 실행
+
+**applicationDidEnterBackground :** 앱이 background 상태일 때 실행
+
+**applicationWillEnterForeground :** 앱이 background에서 foreground로 이동 될때 실행 (아직 foreground에서 실행중이진 않음)
+
+**applicationDidBecomeActive :** 앱이 active상태가 되어 실행 중일 때
+
+**applicationWillTerminate :** 앱이 종료될 때 실행
+
+위 함수를 모두 구현할 필요는 없고, 상황에 맞춰 필요한 함수만 구현해서 사용할수도 있고 위 함수에 포함되지 않더라고 원하는 delegate를 추가해서 사용할 수도 있습니다.
+
 ViewController's Life Cycle
 1. loadView
 view controller의 view property를 불렀는데 아직 nil 상태일 때 불리는 메소드에요.
