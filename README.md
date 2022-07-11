@@ -1,4 +1,43 @@
 # TIL
+2022.07.11
+ANT SOME
+Programing Set
+**ubuntu**
+
+antsome google = songgyeol89@gmail.com , song167855!
+
+chrome, slack,vscode,open jdk11, dbeaver, notion, git
+
+dbeaver = [https://ubunlog.com/ko/dbeaver-gestiona-bases-de-datos/?utm_source=feedburner&utm_medium=%24{feed%2C+email}&utm_campaign=Feed%3A+%24{Ubunlog}+(%24{Ubunlog})](https://ubunlog.com/ko/dbeaver-gestiona-bases-de-datos/?utm_source=feedburner&utm_medium=%24%7Bfeed%2C+email%7D&utm_campaign=Feed%3A+%24%7BUbunlog%7D+%28%24%7BUbunlog%7D%29)
+
+1. wget [https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb](https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb)
+2. sudo dpkg -i dbeaver-ce*.deb
+
+git = [https://coding-factory.tistory.com/502](https://coding-factory.tistory.com/502)
+
+1. sudo apt-get install git 명령어를 입력하여 패키지 리스트를 업데이트합니다.
+2. sudo apt install git 명령어를 입력하여 깃을 설치합니다.
+3. git --version이라는 명령어를 입력하면 설치할 git의 버전을 알 수 있습니다. 저는 2.17.1버전이군요.
+4. 
+
+아래 명령어를 입력하여 깃에 push했을때 올라갈 내 정보를 입력해줍니다.
+
+git config --global [user.name](http://user.name/) [이름]
+
+git config --global user.mail [메일 주소]
+
+1. git clone [url 주소] 를 입력하여 자신이 원하는 프로젝트를 깃으로부터 내려받습니다.
+
+OnBoarding
+
+IoT,HTML5,NFC,HomePage,App
+
+**Java**,Android,Flutter
+
+java = [https://www.youtube.com/watch?v=wjLwmWyItWI](https://www.youtube.com/watch?v=wjLwmWyItWI)
+
+[https://www.inflearn.com/course/자바java-언어-기본-강좌#curriculum](https://www.inflearn.com/course/%EC%9E%90%EB%B0%94java-%EC%96%B8%EC%96%B4-%EA%B8%B0%EB%B3%B8-%EA%B0%95%EC%A2%8C#curriculum)
+
 ****App Lifecycle****
 앱 생명주기는 앱이 화면상에 보이는 foreground 상태, 보이지 않는 background 상태 등과 같은 상태를 정의한 것 입니다.  홈버튼을 누르거나, 전화가 와서 화면이 전환되는 등 앱의 상태변화를 이해하기 위해서는 앱 생명주기를 이해할 필요가 있습니다.
 
