@@ -1,4 +1,62 @@
 # TIL
+2022.07.12
+Android studio는 기본적으로 무거움(기본기능 다양)
+
+VSCode는 가벼움(패키지?직접 설치해서 입맛대로)
+
+AndroidStudio 설치
+
+[https://mebadong.tistory.com/64](https://mebadong.tistory.com/64)
+
+실행아이콘 만들기
+
+[https://elecs.tistory.com/155](https://elecs.tistory.com/155)
+
+To start the application, open a console, cd into "{installation home}/bin" and type:
+
+```
+   ./studio.sh
+```
+
+**새 액티비티 파일만들기 = [https://jhshjs.tistory.com/55](https://jhshjs.tistory.com/55)**
+
+**화면딜레이전환 = [https://pikac.tistory.com/163](https://pikac.tistory.com/163) , [https://pikac.tistory.com/163](https://pikac.tistory.com/163)**
+
+**안드로이드 스튜디오 Default Activity not found 처리 방법 = [https://crone.tistory.com/506](https://crone.tistory.com/506)**
+
+`onCreate`
+
+java - [activity - xml] **set**
+
+**java-class**
+
+![스크린샷, 2022-07-12 11-26-32.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/65eeb5f7-3997-4c58-81bf-7d4cf623562b/스크린샷_2022-07-12_11-26-32.png)
+
+**layout-activity.xml**
+
+![스크린샷, 2022-07-12 11-51-01.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/46d50e46-ea3c-4ef0-9140-6f43526934df/스크린샷_2022-07-12_11-51-01.png)
+
+ **Tool?!**
+
+![스크린샷, 2022-07-12 11-55-32.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c3afcad0-2b95-40d7-9c70-eaf37e457c3e/스크린샷_2022-07-12_11-55-32.png)
+
+DeviceManager - Emulator
+
+SDKManager - Platform Package Download(버젼별 필요한)
+
+**Design** - **Palette=Library**
+
+![스크린샷, 2022-07-12 11-58-17.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/35cfaa96-e32e-4620-8816-fc5c2a253561/스크린샷_2022-07-12_11-58-17.png)
+
+![스크린샷, 2022-07-12 13-49-07.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1183103a-3545-4119-ab27-df8bf1f7151a/스크린샷_2022-07-12_13-49-07.png)
+
+**[기본적인 환경변수설정]**
+
+ubuntu adb 환경변수 설정
+
+ubuntu java home 설정
+
+
 2022.07.11
 ANT SOME
 Programing Set
