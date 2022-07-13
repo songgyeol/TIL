@@ -1,4 +1,29 @@
 # TIL
+2022.07.13
+**• 맥북 세팅하기(프로그램)**
+
+  ~~chrome, slack, notion, git~~,~~VScode~~, 
+
+**~~open jdk11~~** = [https://timevoyage.tistory.com/145](https://timevoyage.tistory.com/145), [https://github.com/AdoptOpenJDK/homebrew-openjdk](https://github.com/AdoptOpenJDK/homebrew-openjdk)
+
+**~~DBeaver~~ =** [https://dbeaver.io/download/](https://dbeaver.io/download/)
+
+**~~AndroidStudio~~ =** [https://2vup.com/mac-install-android-studio/](https://2vup.com/mac-install-android-studio/)
+
+**~~adb 환경변수 설정~~**  [**https://developer88.tistory.com/174](https://developer88.tistory.com/174) ,** [https://linitial.tistory.com/22](https://linitial.tistory.com/22),
+
+.bash_profile 수정
+
+환경 변수를 등록하기 위해서 `.bash_profile`을 수정하면 됩니다. 터미널에서 `nano`를 이용해서 수정을 해도 되고, 편하게 GUI 상의 `텍스트편집기`를 이용해서 수정을 해도 됩니다. 기본적으로 `.bash_profile`은 속성이 ‘숨김(Hidden)’으로 되어있습니다. Finder에서 숨김 파일을 보기 위해서는 Finder 창 안에서 단축키 shift + command + . 을 누르면 됩니다. `.bash_profile`은 `/User/[사용자계정]` 아래에 위치하고 있습니다.
+
+**java home 설정**
+
+**• git 사용**
+
+**• 과제 (이미지 화면 전환 다시 해보기)**
+
+**맥에서 JDK환경변수(PATH) 설정** = [https://hymndev.tistory.com/5](https://hymndev.tistory.com/5)
+
 2022.07.12
 Android studio는 기본적으로 무거움(기본기능 다양)
 
